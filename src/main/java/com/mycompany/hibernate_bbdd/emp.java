@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class emp {
     @Column(name = "empno")
     private int empno;
+    @Column(name = "ename")
     private String ename;
     @Column(name = "job")
     private String job;
@@ -27,6 +28,19 @@ public class emp {
     @Column(name = "deptno")
     private float deptno;
 
-    
+    public emp (int empno, String ename, String job, int mgr, Date hiredate, float sal, float comm, float deptno){
+        this.empno=empno;
+        this.ename=ename;
+        this.job=job;
+        this.mgr=mgr;
+        this.hiredate=hiredate;
+        this.sal=sal;
+        this.comm=comm;
+        this.deptno=deptno;
+    }
 
-}
+    }
+
+
+
+
