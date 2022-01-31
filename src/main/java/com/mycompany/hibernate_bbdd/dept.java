@@ -1,11 +1,5 @@
 package com.mycompany.hibernate_bbdd;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 import java.awt.color.ICC_ColorSpace;
 
@@ -13,11 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-/**
- *
- * @author Developer
- */
 
 @Entity
 @Table(name="dept")
@@ -38,7 +27,24 @@ public class dept {
         this.loc=_loc;
     }
     
-    
+    public int getDeptno(){
+        return deptno;
+    }
+    public String getDname(){
+        return dname;
+    }
+    public String getLoc(){
+        return loc;
+    }
+    public void setDeptno(int _deptno){
+        this.deptno=_deptno;
+    }
+    public void setDname(String _dname){
+        this.dname=_dname;
+    }
+    public void setLoc(String _loc){
+        this.loc=_loc;
+    }
     
 }
 
