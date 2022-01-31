@@ -30,7 +30,7 @@ public class Empresa {
         }while(opcion!=5);
         ent.close();
     }
-    public static int menu(Scanner ent,int opcion){
+    static int menu(Scanner ent,int opcion){
         System.out.println("Menu");
         System.out.println("1. Insertar tabla DEPT");
         System.out.println("2. Borrar tabla DEPT");
@@ -42,5 +42,17 @@ public class Empresa {
             opcion=ent.nextInt();
         }while(opcion<1||opcion>5);
         return opcion;
+    }
+    static void insertarTabla(){
+        
+    }
+    static void borrarTabla(){
+        
+    }
+    static void mostrarTablaEMP(){
+        
+    }
+    static void mostrarTablaDEPT(){
+        
     }
 }
