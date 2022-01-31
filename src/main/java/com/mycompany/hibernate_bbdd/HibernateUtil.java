@@ -1,3 +1,11 @@
+package com.mycompany.hibernate_bbdd;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 public class HibernateUtil {
 
   private static SessionFactory sessionFactory;
@@ -11,10 +19,8 @@ public class HibernateUtil {
     Configuration configuration = new Configuration();
     configuration.configure();
     // Se registran las clases que hay que mapear con cada tabla de la base de datos
-    configuration.addAnnotatedClass(Clase1.class);
-    configuration.addAnnotatedClass(Clase2.class);
-    configuration.addAnnotatedClass(Clase3.class);
-    . . .
+    configuration.addAnnotatedClass(dept.class);
+    configuration.addAnnotatedClass(emp.class);
     
     ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
       configuration.getProperties()).build();

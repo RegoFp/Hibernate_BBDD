@@ -1,6 +1,8 @@
 package com.mycompany.hibernate_bbdd;
 import java.util.Scanner;
 public class Empresa {
+    static BBDD bd = new BBDD();
+
     public static void main(String []args){
         Scanner ent=new Scanner(System.in);
         int opcion=0;
@@ -30,29 +32,37 @@ public class Empresa {
         }while(opcion!=5);
         ent.close();
     }
-    static int menu(Scanner ent,int opcion){
+
+    private static void mostrarTablaDEPT() {
+    }
+
+    private static void mostrarTablaEMP() {
+    }
+
+    private static void borrarTabla() {
+    }
+
+    private static void insertarTabla() {
+
+        dept depto = new dept(101, "sip", "sip");
+        bd.postDept(depto);
+
+
+    }
+
+
+
+    public static int menu(Scanner ent,int opcion){
         System.out.println("Menu");
         System.out.println("1. Insertar tabla DEPT");
         System.out.println("2. Borrar tabla DEPT");
         System.out.println("3. Mostrar tabla EMP");
         System.out.println("4. Mostrar tabla DEPT");
         System.out.println("5. Salir");
-        do {
+        do {  //TODO asegurar que la entrada sea un numero
             System.out.println("Introduce una opcion(1-5)");
             opcion=ent.nextInt();
         }while(opcion<1||opcion>5);
         return opcion;
-    }
-    static void insertarTabla(){
-        
-    }
-    static void borrarTabla(){
-        
-    }
-    static void mostrarTablaEMP(){
-        
-    }
-    static void mostrarTablaDEPT(){
-        
     }
 }
