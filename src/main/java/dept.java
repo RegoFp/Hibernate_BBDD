@@ -1,29 +1,29 @@
 import java.awt.color.ICC_ColorSpace;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="dept")
+@Table(name="DEPT")
 public class dept {
     @Id //Clave primaria
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="deptno")
     private int deptno;
     @Column(name="dname")
     private String dname;
     @Column(name="loc")
     private String loc;
-    
-    
-    //Constructor
-    public dept(int _deptno, String _dname, String _loc){
-        this.deptno = _deptno;
-        this.dname=_dname;
-        this.loc=_loc;
+
+
+    public dept() {
     }
-    
+
+    //Constructor
+    public dept(String _dname, String _loc){
+        dname= _dname;
+        loc= _loc;
+    }
+
     public int getDeptno(){
         return deptno;
     }

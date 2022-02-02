@@ -29,9 +29,9 @@ public class HibernateUtil {
   public static void buildSessionFactory() {
 
     Properties properties = new Properties();
-    //properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-    properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");      
-    properties.put(Environment.URL, "database-1.cvliipm1ojas.eu-west-2.rds.amazonaws.com");
+    properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+    //properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");      
+    properties.put(Environment.URL, "jdbc:mysql://database-1.cvliipm1ojas.eu-west-2.rds.amazonaws.com/sys");
     properties.put(Environment.USER, "admin");
     properties.put(Environment.PASS, "administrador");
     properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");

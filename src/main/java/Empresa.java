@@ -43,7 +43,7 @@ public class Empresa {
 
     private static void insertarTabla() {
 
-        dept depto = new dept(101, "sip", "sip");
+        dept depto = new dept("sip", "sip");
         bd.postDept(depto);
 
 
