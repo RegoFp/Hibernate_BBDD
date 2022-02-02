@@ -1,5 +1,3 @@
-package com.mycompany.hibernate_bbdd;
-
 import java.sql.Date;
 
 import javax.persistence.Column;

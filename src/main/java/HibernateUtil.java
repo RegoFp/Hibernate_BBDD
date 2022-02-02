@@ -1,7 +1,7 @@
-package com.mycompany.hibernate_bbdd;
-
+import java.io.File;
 import java.util.Properties;
 
+import com.fasterxml.classmate.AnnotationConfiguration;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -29,18 +29,19 @@ public class HibernateUtil {
   public static void buildSessionFactory() {
 
     Properties properties = new Properties();
-    properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
+    //properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+    properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");      
     properties.put(Environment.URL, "database-1.cvliipm1ojas.eu-west-2.rds.amazonaws.com");
     properties.put(Environment.USER, "admin");
     properties.put(Environment.PASS, "administrador");
     properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-    properties.put(Environment.SHOW_SQL, true);
-    
+    properties.put(Environment.SHOW_SQL, "true");
 
 
     Configuration configuration = new Configuration();
     configuration.setProperties(properties);
     configuration.configure();
+
     // Se registran las clases que hay que mapear con cada tabla de la base de datos
     configuration.addAnnotatedClass(dept.class);
     configuration.addAnnotatedClass(emp.class);
@@ -48,6 +49,7 @@ public class HibernateUtil {
     ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
       configuration.getProperties()).build();
     sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
   }
 	
   /**

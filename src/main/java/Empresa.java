@@ -1,4 +1,3 @@
-package com.mycompany.hibernate_bbdd;
 import java.util.Scanner;
 public class Empresa {
     static BBDD bd = new BBDD();

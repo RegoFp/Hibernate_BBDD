@@ -1,6 +1,3 @@
-package com.mycompany.hibernate_bbdd;
-
-
 import java.awt.color.ICC_ColorSpace;
 
 import javax.persistence.Column;

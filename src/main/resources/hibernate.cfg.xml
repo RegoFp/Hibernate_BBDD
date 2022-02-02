@@ -3,6 +3,6 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration">
 <hibernate-configuration>
   <session-factory>
-    
-   </session-factory>
+
+  </session-factory>
 </hibernate-configuration>
