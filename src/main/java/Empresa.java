@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 public class Empresa {
     static BBDD bd = new BBDD();
@@ -33,9 +34,26 @@ public class Empresa {
     }
 
     private static void mostrarTablaDEPT() {
+
+        List<dept> list = bd.showDept();
+
+        int index  = 1;//Esta forma de hacer el for no devuelve la posicion
+        for(dept depto: list){   
+            System.out.println(index +" "+ depto.getDname()+" "+ depto.getLoc());
+            index += 1;
+        }
+
+
     }
 
     private static void mostrarTablaEMP() {
+        List<emp> list = bd.showEmp();
+
+     
+        for(emp empl: list){   
+            System.out.println(empl.getComm()+""+empl.getDeptno()+""+empl.getEmpno()+""+empl.getEname());
+       
+        }
     }
 
     private static void borrarTabla() {

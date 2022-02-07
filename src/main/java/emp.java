@@ -15,7 +15,7 @@ public class emp {
     @Column(name = "job")
     private String job;
     @Column(name = "mgr")
-    private int mgr;
+    private float mgr;
     @Column(name = "hiredate")
     private Date hiredate;
     @Column(name = "sal")
@@ -24,12 +24,12 @@ public class emp {
     private float comm;
     @Id
     @Column(name = "deptno")
-    private float deptno;
+    private int deptno;
 
     public emp() {
     }
 
-    public emp (int empno, String ename, String job, int mgr, Date hiredate, float sal, float comm, float deptno){
+    public emp (int empno, String ename, String job, int mgr, Date hiredate, float sal, float comm, int deptno){
         this.empno=empno;
         this.ename=ename;
         this.job=job;
@@ -49,7 +49,7 @@ public class emp {
     public String getJob(){
         return job;
     }
-    public int getMgr(){
+    public float getMgr(){
         return mgr;
     }
     public Date getHiredate(){
@@ -66,28 +66,28 @@ public class emp {
     }
     
     public void setEmpno(int _empno){
-        this.empno=_empno;
+        empno=_empno;
     }
     public void setEname(String _ename){
         this.ename=_ename;
     }
     public void setJob(String _job){
-        this.job=_job;
+        job=_job;
     }
     public void setMgr(int _mgr){
-        this.mgr=_mgr;
+        mgr=_mgr;
     }
     public void setHiredate(Date _hiredate){
-        this.hiredate=_hiredate;
+        hiredate=_hiredate;
     }
     public void setSal(float _sal){
-        this.sal=_sal;
+        sal=_sal;
     }
     public void setComm(float _comm){
-        this.comm=_comm;
+        comm=_comm;
     }
-    public void setDeptno(float _deptno){
-        this.deptno=_deptno;
+    public void setDeptno(int _deptno){
+        deptno=_deptno;
     }
 }
 
