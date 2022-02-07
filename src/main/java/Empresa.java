@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Date;
 public class Empresa {
     static BBDD bd = new BBDD();
 
@@ -9,7 +10,7 @@ public class Empresa {
             opcion=menu(ent,opcion);
             switch(opcion){
                 case 1:
-                    insertarTabla();
+                    insertarTabla(ent);
                     break;
                 case 2:
                     borrarTabla();
@@ -41,10 +42,61 @@ public class Empresa {
     private static void borrarTabla() {
     }
 
-    private static void insertarTabla() {
-
-        dept depto = new dept("sip", "sip");
-        bd.postDept(depto);
+    private static void insertarTabla(Scanner sc) {
+        String name, loc;
+        
+        System.out.println("Tabla DEPTNO");
+        
+        do{
+            System.out.print("\nIntroduce el nombre ");
+            name=sc.nextLine();
+            System.out.print("\nIntroduce la locación ");
+            loc=sc.nextLine();
+        }while(name!="\n");
+        if(name.equals("\n"){
+            
+        }else{
+            dept depto = new dept(name, loc);
+            bd.postDept(depto);
+        }
+        
+        String name, job;
+        int mrg, deptno;
+        float sal, comm;
+        Date hiredate=new Date();
+        
+        System.out.println("Tabla EMP");
+        
+        do{
+            System.out.print("\nIntroduce el nombre ");
+            name=sc.nextLine();
+            System.out.print("\nIntroduce el trabajo ");
+            job=sc.nextLine();
+            System.out.print("\nJefe de?");
+            mrg=sc.nextInt();
+            System.out.print("\nIntroduce la fecha");
+            System.out.println("Año: "+ (hiredate.getYear()+1900) );
+            System.out.println("Mes: "+hiredate.getMonth());
+            System.out.println("Dia: "+hiredate.getDate());
+            System.out.println("Dia de la semana "+hiredate.getDay());
+            System.out.println("Hora: "+hiredate.getHours());
+            System.out.println("Minutos: "+hiredate.getMinutes());
+            System.out.println("Segundos: "+hiredate.getSeconds());
+            System.out.print("\nIntroduce el salario");
+            sal=sc.nextFloat();
+            System.out.print("\nIntroduce el comm");
+            comm=sc.nextFloat();
+             do{
+                System.out.print("\nDepartamento?");
+                deptno=sc.nextInt();
+            }while(deptno.isEmpty());
+        }while(name!=null);
+        if(name==null){
+            
+        }else{
+            empt empto = new empt(name, job, mrg, hiredate, sal, comm, deptno);
+            bd.postEmpt(empto);
+        }
 
 
     }
