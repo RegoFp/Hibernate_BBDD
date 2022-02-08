@@ -8,24 +8,28 @@ public class Empresa {
         Scanner ent=new Scanner(System.in);
         int opcion=0;
         do{
-            opcion=menu(ent,opcion);
+            opcion=menu(ent);
             switch(opcion){
                 case 1:
-                    //insertarTablaDeptno(ent);
-                    insertarTablaEmp(ent);
+                    insertarTablaDeptno(ent);
                     break;
                 case 2:
-                    borrarTablaDept();
+                    insertarTablaEmp(ent);
                     break;
                 case 3:
-                    mostrarTablaEMP();
+                    borrarTablaDept();
                     break;
                 case 4:
-                    mostrarTablaDEPT();
+                    borrarTablaEmp();
                     break;
                 case 5:
-                    System.out.println("Fin del programa");
+                    mostrarTablaDept();
                     break;
+                case 6:
+                    mostrarTablaEmp();
+                    break;
+                case 7:
+                    System.out.println("Fin del programa");
                 default:
                     break;
 
@@ -35,7 +39,10 @@ public class Empresa {
         ent.close();
     }
 
-    private static void mostrarTablaDEPT() {
+    private static void borrarTablaDept() {
+    }
+
+    private static void mostrarTablaDept() {
 
         List<dept> list = bd.showDept();
 
@@ -48,7 +55,7 @@ public class Empresa {
 
     }
 
-    private static void mostrarTablaEMP() {
+    private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
 
         for(emp empl: list){   
@@ -57,6 +64,8 @@ public class Empresa {
         }
     }
 
+    private static void borrarTablaEmp() {
+    }
     private static void borrarTablaDept() {
         bd.delDept();
     }
@@ -115,17 +124,22 @@ public class Empresa {
 
 
 
-    public static int menu(Scanner ent,int opcion){
+    public static int menu(Scanner ent){
+        int opcion;
         System.out.println("Menu");
-        System.out.println("1. Insertar en tabla DEPT");
-        System.out.println("2. Borrar de tabla DEPT");
-        System.out.println("3. Mostrar tabla EMP");
-        System.out.println("4. Mostrar tabla DEPT");
-        System.out.println("5. Salir");
+
+        System.out.println("1. Insertar tabla DEPT");
+        System.out.println("2. Insertar tabla EMP");
+        System.out.println("3. Borrar tabla DEPT");
+        System.out.println("4. Borrar tabla EMP");
+        System.out.println("5. Mostrar tabla DEPT");
+        System.out.println("6. Mostrar tabla EMP");
+        System.out.println("7. Salir");
+
         do {  //TODO asegurar que la entrada sea un numero
-            System.out.println("Introduce una opcion(1-5)");
+            System.out.println("Introduce una opcion(1-7)");
             opcion=ent.nextInt();
-        }while(opcion<1||opcion>5);
+        }while(opcion<1||opcion>7);
         return opcion;
     }
 }
