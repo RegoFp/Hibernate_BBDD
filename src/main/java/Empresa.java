@@ -1,6 +1,9 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Date;
 public class Empresa {
     static BBDD bd = new BBDD();
 
@@ -100,41 +103,91 @@ public class Empresa {
      //TODO asegurase que la clave foranea se cumple 
      //TODO Comprobar que es no existe ya
      //Asegurar todas las entradas
-     private static void insertarTablaEmp(Scanner sc){
-        
+     private static void insertarTablaEmp(Scanner ent){
+        Scanner sc=ent;
         String name, job,fecha;
-        int  id,deptno;
-        float mrg, sal, comm;
+        int id,deptno;
+        float sal, comm, mrg;
  
         
-        System.out.println("Tabla EMP");
+        System.out.println("Tabla EMP\n");
         
-        System.out.print("\nID?");
+        System.out.print("ID?\n");
         id=sc.nextInt();
         sc.nextLine();
-        System.out.print("\nIntroduce el nombre ");
+        
+        System.out.print("Introduce el nombre \n");
         name=sc.nextLine();
-        System.out.print("\nIntroduce el trabajo ");
+        
+        System.out.print("Introduce el trabajo \n");
         job=sc.nextLine();
-        System.out.print("\nJefe de?");
+        
+        System.out.print("Jefe de ?\n");
         mrg=sc.nextFloat();
         sc.nextLine();
-        System.out.print("\nIntroduce la fecha"); //Validar
-        fecha=sc.nextLine();
-        System.out.print("\nIntroduce el salario");
+
+        //Validar fecha
+        fecha = validacionFecha(sc);
+        
+        System.out.print("Introduce el salario\n");
         sal=sc.nextFloat();
-        sc.nextLine();
-        System.out.print("\nIntroduce el comm");
+        
+        System.out.print("Introduce el comm\n");
         comm=sc.nextFloat();
-        sc.nextLine();
-        System.out.print("\nDepartamento?");
+        
+        System.out.print("Departamento?\n");
         deptno=sc.nextInt();
         sc.nextLine();
-            
+
         emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
         bd.postEmp(empto);
         
 
+    }
+    public static String validacionFecha(Scanner sc){
+        String fecha = null;
+        int seleccion;
+        
+             System.out.println("¿La fecha corresponde con la actual?(S:1 N:2)");
+             seleccion = sc.nextInt();
+             
+             switch(seleccion){
+                 case 1:{
+                     LocalDateTime now = LocalDateTime.now();                 
+                     fecha = now.getYear()+"/"+now.getMonthValue()+"/"+now.getDayOfMonth();
+                      }break;
+                 case 2:{
+                     
+                    int anho=0, mes = 0, dia = 0;
+                    boolean correcto = false;
+
+                    while(!correcto){
+                       System.out.println("Introduce el año");
+                         anho = sc.nextInt();
+                       System.out.println("mes (1-12)");
+                         mes = sc.nextInt();
+                       System.out.println("dia");
+                         dia = sc.nextInt();
+
+                       try {
+                           //Formato de fecha (día/mes/año)
+                           SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+                           formatoFecha.setLenient(false);
+                           //Comprobación de la fecha
+                           formatoFecha.parse(anho + "/" + mes + "/" + dia);
+                           correcto = true;
+                           fecha = anho + "/" + mes + "/" + dia;
+                       } catch (ParseException e) {
+                           //Si la fecha no es correcta, pasará por aquí
+                           System.out.println("Fecha en foramto incorrecto.");
+                           correcto = false;
+                       }                 
+                    }  
+                 }break;
+                 default:
+                     System.out.println("Introduce 1 o 2 para seleccionar el menú");
+             }      
+        return fecha;
     }
 
 
