@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Date;
 public class Empresa {
     static BBDD bd = new BBDD();
 
@@ -12,24 +11,28 @@ public class Empresa {
         Scanner ent=new Scanner(System.in);
         int opcion=0;
         do{
-            opcion=menu(ent,opcion);
+            opcion=menu(ent);
             switch(opcion){
                 case 1:
-                    //insertarTablaDeptno(ent);
-                    insertarTablaEmp(ent);
+                    insertarTablaDeptno(ent);
                     break;
                 case 2:
-                    borrarTabla();
+                    insertarTablaEmp(ent);
                     break;
                 case 3:
-                    mostrarTablaEMP();
+                    borrarTablaDept();
                     break;
                 case 4:
-                    mostrarTablaDEPT();
+                    borrarTablaEmp(ent);
                     break;
                 case 5:
-                    System.out.println("Fin del programa");
+                    mostrarTablaDept();
                     break;
+                case 6:
+                    mostrarTablaEmp();
+                    break;
+                case 7:
+                    System.out.println("Fin del programa");
                 default:
                     break;
 
@@ -39,7 +42,10 @@ public class Empresa {
         ent.close();
     }
 
-    private static void mostrarTablaDEPT() {
+    private static void delDept() {
+    }
+
+    private static void mostrarTablaDept() {
 
         List<dept> list = bd.showDept();
 
@@ -52,18 +58,32 @@ public class Empresa {
 
     }
 
-    private static void mostrarTablaEMP() {
+    private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
 
+        System.out.println("Comm    Deptno  Emp    Name");
         for(emp empl: list){   
-            System.out.println(empl.getComm()+""+empl.getDeptno()+""+empl.getEmpno()+""+empl.getEname());
+            System.out.println(empl.getComm()+" "+empl.getDeptno()+" "+empl.getEmpno()+" "+empl.getEname());
        
         }
     }
 
-    private static void borrarTabla() {
+    //TODO comprobar si existe antes de borrar
+    private static void borrarTablaEmp(Scanner ent) {
+        int id;
+        System.out.println("Introduce el usuario que quieres borrar");
+        id= ent.nextInt();  //TODO asegurar entrada
+        emp emplead = bd.getEmp(id);
+        bd.delEmp(emplead);
+
+
     }
 
+    private static void borrarTablaDept() {
+        bd.delDept();
+    }
+
+    
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
         
@@ -79,6 +99,10 @@ public class Empresa {
         
     }
 
+
+     //TODO asegurase que la clave foranea se cumple 
+     //TODO Comprobar que es no existe ya
+     //Asegurar todas las entradas
      private static void insertarTablaEmp(Scanner ent){
         Scanner sc=ent;
         String name, job,fecha;
@@ -119,24 +143,6 @@ public class Empresa {
         bd.postEmp(empto);
         
 
-    }
-
-
-
-    public static int menu(Scanner ent,int opcion){
-        System.out.println("Menu");
-        System.out.println("1. Insertar en tabla DEPT");
-        System.out.println("2. Borrar de tabla DEPT");
-        System.out.println("3. Mostrar tabla EMP");
-        System.out.println("4. Mostrar tabla DEPT");
-        System.out.println("5. Salir");
-        do {  //TODO asegurar que la entrada sea un numero
-            System.out.println("Introduce una opcion(1-5)");
-            opcion=ent.nextInt();
-            ent.nextLine();
-
-        }while(opcion<1||opcion>5);
-        return opcion;
     }
     public static String validacionFecha(Scanner sc){
         String fecha = null;
@@ -182,5 +188,28 @@ public class Empresa {
                      System.out.println("Introduce 1 o 2 para seleccionar el menú");
              }      
         return fecha;
+    }
+
+
+
+    public static int menu(Scanner ent){
+        int opcion;
+        System.out.println("Menu");
+
+        System.out.println("1. Insertar tabla DEPT");
+        System.out.println("2. Insertar tabla EMP");
+        System.out.println("3. Borrar tabla DEPT");
+        System.out.println("4. Borrar tabla EMP");
+        System.out.println("5. Mostrar tabla DEPT");
+        System.out.println("6. Mostrar tabla EMP");
+        System.out.println("7. Salir");
+
+        do {  //TODO asegurar que la entrada sea un numero
+            System.out.println("Introduce una opcion(1-7)");
+            opcion=ent.nextInt();
+            ent.nextLine();
+        }while(opcion<1||opcion>7);
+
+        return opcion;
     }
 }
