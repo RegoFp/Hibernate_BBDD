@@ -15,7 +15,7 @@ public class Empresa {
                     insertarTablaEmp(ent);
                     break;
                 case 2:
-                    borrarTabla();
+                    borrarTablaDept();
                     break;
                 case 3:
                     mostrarTablaEMP();
@@ -57,7 +57,8 @@ public class Empresa {
         }
     }
 
-    private static void borrarTabla() {
+    private static void borrarTablaDept() {
+        bd.delDept();
     }
 
     private static void insertarTablaDeptno(Scanner sc) {
