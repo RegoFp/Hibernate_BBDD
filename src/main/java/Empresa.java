@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
+import java.util.Date;
 public class Empresa {
     static BBDD bd = new BBDD();
 
@@ -10,7 +11,8 @@ public class Empresa {
             opcion=menu(ent,opcion);
             switch(opcion){
                 case 1:
-                    insertarTabla();
+                    insertarTablaDeptno(ent);
+                    insertarTablaEmp(ent);
                     break;
                 case 2:
                     borrarTabla();
@@ -59,11 +61,50 @@ public class Empresa {
     private static void borrarTabla() {
     }
 
-    private static void insertarTabla() {
-
-        dept depto = new dept("sip", "sip");
+    private static void insertarTablaDeptno(Scanner sc) {
+        String name, loc;
+        
+        System.out.println("Tabla DEPTNO");
+        
+        System.out.print("\nIntroduce el nombre ");
+        name=sc.nextLine();
+        System.out.print("\nIntroduce la locación ");
+        loc=sc.nextLine();
+        
+        dept depto = new dept(name, loc);
         bd.postDept(depto);
+        
+    }
 
+     private static void insertarTablaEmp(Scanner sc){
+        
+        String name, job,fecha;
+        int mrg, id;
+        float sal,deptno, comm;
+        Date hiredate=new Date();
+        
+        System.out.println("Tabla EMP");
+        
+        System.out.print("\nID?");
+        id=sc.nextInt();
+        System.out.print("\nIntroduce el nombre ");
+        name=sc.nextLine();
+        System.out.print("\nIntroduce el trabajo ");
+        job=sc.nextLine();
+        System.out.print("\nJefe de?");
+        mrg=sc.nextInt();
+        System.out.print("\nIntroduce la fecha"); //Validar
+        fecha=sc.nextLine();
+        System.out.print("\nIntroduce el salario");
+        sal=sc.nextFloat();
+        System.out.print("\nIntroduce el comm");
+        comm=sc.nextFloat();
+        System.out.print("\nDepartamento?");
+        deptno=sc.nextInt();
+            
+        emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
+        //bd.postEMP(empto);
+        
 
     }
 
