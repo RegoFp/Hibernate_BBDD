@@ -7,8 +7,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.fasterxml.classmate.AnnotationConfiguration;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 public class BBDD{
@@ -97,12 +99,15 @@ public class BBDD{
     //Eliminar cosas------------------------------------------------------------------------------------------------------
 
     //TODO Busqueda de dept, para que devulva solo 1 dept, para que el usuario solo tenga que introducir el id
-    public void delDept(dept depto){
-
+    public void delDept(){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
-        session.delete(depto);
+        String sql = "DELETE FROM dept";
+        Query query = session.createQuery(sql);
+        int row = query.executeUpdate();
+        if (row != 0)
+            System.out.println("Tabla eliminada");
         session.getTransaction().commit();
         session.close();
     }

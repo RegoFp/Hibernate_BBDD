@@ -66,6 +66,9 @@ public class Empresa {
 
     private static void borrarTablaEmp() {
     }
+    private static void borrarTablaDept() {
+        bd.delDept();
+    }
 
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
