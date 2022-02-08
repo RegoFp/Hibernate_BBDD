@@ -31,6 +31,7 @@ public class BBDD{
     
     //Meter empleado
     public void postEmp(emp empl){
+        HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
 
