@@ -42,23 +42,23 @@ public class Empresa {
     private static void borrarTabla() {
     }
 
-    private static void insertarTabla(Scanner sc) {
+    private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
         
         System.out.println("Tabla DEPTNO");
         
-        do{
             System.out.print("\nIntroduce el nombre ");
             name=sc.nextLine();
             System.out.print("\nIntroduce la locación ");
             loc=sc.nextLine();
-        }while(name!="\n");
+        
         if(name.equals("\n"){
             
         }else{
             dept depto = new dept(name, loc);
             bd.postDept(depto);
         }
+     private static void insertarTablaEmp(Scanner sc){
         
         String name, job;
         int mrg, deptno;
@@ -67,7 +67,6 @@ public class Empresa {
         
         System.out.println("Tabla EMP");
         
-        do{
             System.out.print("\nIntroduce el nombre ");
             name=sc.nextLine();
             System.out.print("\nIntroduce el trabajo ");
@@ -90,14 +89,13 @@ public class Empresa {
                 System.out.print("\nDepartamento?");
                 deptno=sc.nextInt();
             }while(deptno.isEmpty());
-        }while(name!=null);
         if(name==null){
             
         }else{
             empt empto = new empt(name, job, mrg, hiredate, sal, comm, deptno);
             bd.postEmpt(empto);
         }
-
+     }
 
     }
 
