@@ -20,7 +20,7 @@ public class Empresa {
                     borrarTablaDept();
                     break;
                 case 4:
-                    borrarTablaEmp();
+                    borrarTablaEmp(ent);
                     break;
                 case 5:
                     mostrarTablaDept();
@@ -65,12 +65,22 @@ public class Empresa {
         }
     }
 
-    private static void borrarTablaEmp() {
+    //TODO comprobar si existe antes de borrar
+    private static void borrarTablaEmp(Scanner ent) {
+        int id;
+        System.out.println("Introduce el usuario que quieres borrar");
+        id= ent.nextInt();  //TODO asegurar entrada
+        emp emplead = bd.getEmp(id);
+        bd.delEmp(emplead);
+
+
     }
+
     private static void borrarTablaDept() {
         bd.delDept();
     }
 
+    
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
         
@@ -86,6 +96,10 @@ public class Empresa {
         
     }
 
+
+     //TODO asegurase que la clave foranea se cumple 
+     //TODO Comprobar que es no existe ya
+     //Asegurar todas las entradas
      private static void insertarTablaEmp(Scanner sc){
         
         String name, job,fecha;
@@ -140,6 +154,7 @@ public class Empresa {
         do {  //TODO asegurar que la entrada sea un numero
             System.out.println("Introduce una opcion(1-7)");
             opcion=ent.nextInt();
+            ent.nextLine();
         }while(opcion<1||opcion>7);
 
         return opcion;

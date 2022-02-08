@@ -86,7 +86,7 @@ public class BBDD{
 
     //Mostrar solo 1 cosa------------------------------------------------------------------------------------
 
-    //Supuestamente esto devuelve 1 solo empleado, no me lo creo, no lo probe
+    //Devuelve 1 solo empleado
     public emp getEmp(int empno){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
