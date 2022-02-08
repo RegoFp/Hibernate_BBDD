@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "EMP")
 public class emp {
+    @Id
     @Column(name = "empno")
     private int empno;
     @Column(name = "ename")
@@ -15,21 +16,20 @@ public class emp {
     @Column(name = "job")
     private String job;
     @Column(name = "mgr")
-    private float mgr;
+    private Float mgr;
     @Column(name = "hiredate")
     private String hiredate;
     @Column(name = "sal")
     private float sal;
     @Column(name = "comm")
-    private float comm;
-    @Id
+    private Float comm;
     @Column(name = "deptno")
     private int deptno;
 
     public emp() {
     }
 
-    public emp (int empno, String ename, String job, int mgr, String hiredate, float sal, float comm, int deptno){
+    public emp (int empno, String ename, String job, Float mgr, String hiredate, Float sal, Float comm, int deptno){
         this.empno=empno;
         this.ename=ename;
         this.job=job;
@@ -49,16 +49,16 @@ public class emp {
     public String getJob(){
         return job;
     }
-    public float getMgr(){
+    public Float getMgr(){
         return mgr;
     }
     public String getHiredate(){
         return hiredate;
     }
-    public float getSal(){
+    public Float getSal(){
         return sal;
     }
-    public float getComm(){
+    public Float getComm(){
         return comm;
     }
     public float getDeptno(){
@@ -74,7 +74,7 @@ public class emp {
     public void setJob(String _job){
         job=_job;
     }
-    public void setMgr(int _mgr){
+    public void setMgr(Float _mgr){
         mgr=_mgr;
     }
     public void setHiredate(String _hiredate){
