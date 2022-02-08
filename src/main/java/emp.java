@@ -17,7 +17,7 @@ public class emp {
     @Column(name = "mgr")
     private float mgr;
     @Column(name = "hiredate")
-    private Date hiredate;
+    private String hiredate;
     @Column(name = "sal")
     private float sal;
     @Column(name = "comm")
@@ -29,7 +29,7 @@ public class emp {
     public emp() {
     }
 
-    public emp (int empno, String ename, String job, int mgr, Date hiredate, float sal, float comm, int deptno){
+    public emp (int empno, String ename, String job, int mgr, String hiredate, float sal, float comm, int deptno){
         this.empno=empno;
         this.ename=ename;
         this.job=job;
@@ -52,7 +52,7 @@ public class emp {
     public float getMgr(){
         return mgr;
     }
-    public Date getHiredate(){
+    public String getHiredate(){
         return hiredate;
     }
     public float getSal(){
@@ -77,7 +77,7 @@ public class emp {
     public void setMgr(int _mgr){
         mgr=_mgr;
     }
-    public void setHiredate(Date _hiredate){
+    public void setHiredate(String _hiredate){
         hiredate=_hiredate;
     }
     public void setSal(float _sal){

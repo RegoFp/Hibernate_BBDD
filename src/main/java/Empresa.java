@@ -11,7 +11,7 @@ public class Empresa {
             opcion=menu(ent,opcion);
             switch(opcion){
                 case 1:
-                    insertarTablaDeptno(ent);
+                    //insertarTablaDeptno(ent);
                     insertarTablaEmp(ent);
                     break;
                 case 2:
@@ -51,7 +51,6 @@ public class Empresa {
     private static void mostrarTablaEMP() {
         List<emp> list = bd.showEmp();
 
-     
         for(emp empl: list){   
             System.out.println(empl.getComm()+""+empl.getDeptno()+""+empl.getEmpno()+""+empl.getEname());
        
@@ -79,31 +78,36 @@ public class Empresa {
      private static void insertarTablaEmp(Scanner sc){
         
         String name, job,fecha;
-        int mrg, id;
-        float sal,deptno, comm;
-        Date hiredate=new Date();
+        int mrg, id,deptno;
+        float sal, comm;
+ 
         
         System.out.println("Tabla EMP");
         
         System.out.print("\nID?");
         id=sc.nextInt();
+        sc.nextLine();
         System.out.print("\nIntroduce el nombre ");
         name=sc.nextLine();
         System.out.print("\nIntroduce el trabajo ");
         job=sc.nextLine();
         System.out.print("\nJefe de?");
         mrg=sc.nextInt();
+        sc.nextLine();
         System.out.print("\nIntroduce la fecha"); //Validar
         fecha=sc.nextLine();
         System.out.print("\nIntroduce el salario");
         sal=sc.nextFloat();
+        sc.nextLine();
         System.out.print("\nIntroduce el comm");
         comm=sc.nextFloat();
+        sc.nextLine();
         System.out.print("\nDepartamento?");
         deptno=sc.nextInt();
+        sc.nextLine();
             
         emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
-        //bd.postEMP(empto);
+        bd.postEmp(empto);
         
 
     }
@@ -112,8 +116,8 @@ public class Empresa {
 
     public static int menu(Scanner ent,int opcion){
         System.out.println("Menu");
-        System.out.println("1. Insertar tabla DEPT");
-        System.out.println("2. Borrar tabla DEPT");
+        System.out.println("1. Insertar en tabla DEPT");
+        System.out.println("2. Borrar de tabla DEPT");
         System.out.println("3. Mostrar tabla EMP");
         System.out.println("4. Mostrar tabla DEPT");
         System.out.println("5. Salir");
