@@ -17,7 +17,7 @@ public class BBDD{
 
     //Meter cosas----------------------------------------------------
 
-    //Meter departamento
+    //Meter departamento FUNCIONA NO TOCAR
     public void postDept( dept depto){
 
         HibernateUtil.buildSessionFactory();
@@ -31,7 +31,7 @@ public class BBDD{
         session.close();
     }
     
-    //Meter empleado
+    //Meter empleado FUNCIONA NO TOCAR
     public void postEmp(emp empl){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
@@ -52,7 +52,17 @@ public class BBDD{
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
        
-        return session.createQuery("select a FROM dept a",dept.class).getResultList();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<dept> cq = cb.createQuery(dept.class);
+        Root<dept> rootEntry = cq.from(dept.class);
+        CriteriaQuery<dept> all = cq.select(rootEntry);
+        
+        TypedQuery<dept> allQuery = session.createQuery(all);
+        return allQuery.getResultList();
+
+
+        //metodo simple
+        //return session.createQuery("select a FROM dept a",dept.class).getResultList();
         
 
     }
@@ -62,13 +72,6 @@ public class BBDD{
  
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
-       
-        return session.createQuery("select a FROM emp a",emp.class).getResultList();
-
-     //Metodo chuli que aun no se hacer
-
-     /*    HibernateUtil.buildSessionFactory();
-        Session session = HibernateUtil.getCurrentSession();
 
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<emp> cq = cb.createQuery(emp.class);
@@ -77,15 +80,18 @@ public class BBDD{
         
         TypedQuery<emp> allQuery = session.createQuery(all);
         return allQuery.getResultList();
-         */
+        
     }
 
 
     //Mostrar solo 1 cosa------------------------------------------------------------------------------------
 
     //Supuestamente esto devuelve 1 solo empleado, no me lo creo, no lo probe
-    public emp getEmp(String name){
-        emp emp = HibernateUtil.getCurrentSession().get(emp.class, name);
+    public emp getEmp(int empno){
+        HibernateUtil.buildSessionFactory();
+        Session session = HibernateUtil.getCurrentSession();
+
+        emp emp = HibernateUtil.getCurrentSession().get(emp.class, empno);
         return emp;
 
     }

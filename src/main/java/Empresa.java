@@ -58,8 +58,9 @@ public class Empresa {
     private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
 
+        System.out.println("Comm    Deptno  Emp    Name");
         for(emp empl: list){   
-            System.out.println(empl.getComm()+""+empl.getDeptno()+""+empl.getEmpno()+""+empl.getEname());
+            System.out.println(empl.getComm()+" "+empl.getDeptno()+" "+empl.getEmpno()+" "+empl.getEname());
        
         }
     }
@@ -88,8 +89,8 @@ public class Empresa {
      private static void insertarTablaEmp(Scanner sc){
         
         String name, job,fecha;
-        int mrg, id,deptno;
-        float sal, comm;
+        int  id,deptno;
+        float mrg, sal, comm;
  
         
         System.out.println("Tabla EMP");
@@ -102,7 +103,7 @@ public class Empresa {
         System.out.print("\nIntroduce el trabajo ");
         job=sc.nextLine();
         System.out.print("\nJefe de?");
-        mrg=sc.nextInt();
+        mrg=sc.nextFloat();
         sc.nextLine();
         System.out.print("\nIntroduce la fecha"); //Validar
         fecha=sc.nextLine();
