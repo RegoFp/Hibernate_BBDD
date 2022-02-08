@@ -82,8 +82,8 @@ public class Empresa {
      private static void insertarTablaEmp(Scanner ent){
         Scanner sc=ent;
         String name, job,fecha;
-        int mrg, id,deptno;
-        float sal, comm;
+        int id,deptno;
+        float sal, comm, mrg;
  
         
         System.out.println("Tabla EMP\n");
@@ -99,7 +99,7 @@ public class Empresa {
         job=sc.nextLine();
         
         System.out.print("Jefe de ?\n");
-        mrg=sc.nextInt();
+        mrg=sc.nextFloat();
         sc.nextLine();
 
         //Validar fecha
@@ -115,8 +115,6 @@ public class Empresa {
         deptno=sc.nextInt();
         sc.nextLine();
 
-        
-            
         emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
         bd.postEmp(empto);
         
