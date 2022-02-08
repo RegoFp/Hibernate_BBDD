@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Date;
@@ -8,28 +12,24 @@ public class Empresa {
         Scanner ent=new Scanner(System.in);
         int opcion=0;
         do{
-            opcion=menu(ent);
+            opcion=menu(ent,opcion);
             switch(opcion){
                 case 1:
-                    insertarTablaDeptno(ent);
-                    break;
-                case 2:
+                    //insertarTablaDeptno(ent);
                     insertarTablaEmp(ent);
                     break;
+                case 2:
+                    borrarTabla();
+                    break;
                 case 3:
-                    borrarTablaDept();
+                    mostrarTablaEMP();
                     break;
                 case 4:
-                    borrarTablaEmp(ent);
+                    mostrarTablaDEPT();
                     break;
                 case 5:
-                    mostrarTablaDept();
-                    break;
-                case 6:
-                    mostrarTablaEmp();
-                    break;
-                case 7:
                     System.out.println("Fin del programa");
+                    break;
                 default:
                     break;
 
@@ -39,10 +39,7 @@ public class Empresa {
         ent.close();
     }
 
-    private static void delDept() {
-    }
-
-    private static void mostrarTablaDept() {
+    private static void mostrarTablaDEPT() {
 
         List<dept> list = bd.showDept();
 
@@ -55,32 +52,18 @@ public class Empresa {
 
     }
 
-    private static void mostrarTablaEmp() {
+    private static void mostrarTablaEMP() {
         List<emp> list = bd.showEmp();
 
-        System.out.println("Comm    Deptno  Emp    Name");
         for(emp empl: list){   
-            System.out.println(empl.getComm()+" "+empl.getDeptno()+" "+empl.getEmpno()+" "+empl.getEname());
+            System.out.println(empl.getComm()+""+empl.getDeptno()+""+empl.getEmpno()+""+empl.getEname());
        
         }
     }
 
-    //TODO comprobar si existe antes de borrar
-    private static void borrarTablaEmp(Scanner ent) {
-        int id;
-        System.out.println("Introduce el usuario que quieres borrar");
-        id= ent.nextInt();  //TODO asegurar entrada
-        emp emplead = bd.getEmp(id);
-        bd.delEmp(emplead);
-
-
+    private static void borrarTabla() {
     }
 
-    private static void borrarTablaDept() {
-        bd.delDept();
-    }
-
-    
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
         
@@ -96,40 +79,43 @@ public class Empresa {
         
     }
 
-
-     //TODO asegurase que la clave foranea se cumple 
-     //TODO Comprobar que es no existe ya
-     //Asegurar todas las entradas
-     private static void insertarTablaEmp(Scanner sc){
-        
+     private static void insertarTablaEmp(Scanner ent){
+        Scanner sc=ent;
         String name, job,fecha;
-        int  id,deptno;
-        float mrg, sal, comm;
+        int mrg, id,deptno;
+        float sal, comm;
  
         
-        System.out.println("Tabla EMP");
+        System.out.println("Tabla EMP\n");
         
-        System.out.print("\nID?");
+        System.out.print("ID?\n");
         id=sc.nextInt();
         sc.nextLine();
-        System.out.print("\nIntroduce el nombre ");
+        
+        System.out.print("Introduce el nombre \n");
         name=sc.nextLine();
-        System.out.print("\nIntroduce el trabajo ");
+        
+        System.out.print("Introduce el trabajo \n");
         job=sc.nextLine();
-        System.out.print("\nJefe de?");
-        mrg=sc.nextFloat();
+        
+        System.out.print("Jefe de ?\n");
+        mrg=sc.nextInt();
         sc.nextLine();
-        System.out.print("\nIntroduce la fecha"); //Validar
-        fecha=sc.nextLine();
-        System.out.print("\nIntroduce el salario");
+
+        //Validar fecha
+        fecha = validacionFecha(sc);
+        
+        System.out.print("Introduce el salario\n");
         sal=sc.nextFloat();
-        sc.nextLine();
-        System.out.print("\nIntroduce el comm");
+        
+        System.out.print("Introduce el comm\n");
         comm=sc.nextFloat();
-        sc.nextLine();
-        System.out.print("\nDepartamento?");
+        
+        System.out.print("Departamento?\n");
         deptno=sc.nextInt();
         sc.nextLine();
+
+        
             
         emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
         bd.postEmp(empto);
@@ -139,24 +125,64 @@ public class Empresa {
 
 
 
-    public static int menu(Scanner ent){
-        int opcion;
+    public static int menu(Scanner ent,int opcion){
         System.out.println("Menu");
-
-        System.out.println("1. Insertar tabla DEPT");
-        System.out.println("2. Insertar tabla EMP");
-        System.out.println("3. Borrar tabla DEPT");
-        System.out.println("4. Borrar tabla EMP");
-        System.out.println("5. Mostrar tabla DEPT");
-        System.out.println("6. Mostrar tabla EMP");
-        System.out.println("7. Salir");
-
+        System.out.println("1. Insertar en tabla DEPT");
+        System.out.println("2. Borrar de tabla DEPT");
+        System.out.println("3. Mostrar tabla EMP");
+        System.out.println("4. Mostrar tabla DEPT");
+        System.out.println("5. Salir");
         do {  //TODO asegurar que la entrada sea un numero
-            System.out.println("Introduce una opcion(1-7)");
+            System.out.println("Introduce una opcion(1-5)");
             opcion=ent.nextInt();
             ent.nextLine();
-        }while(opcion<1||opcion>7);
 
+        }while(opcion<1||opcion>5);
         return opcion;
+    }
+    public static String validacionFecha(Scanner sc){
+        String fecha = null;
+        int seleccion;
+        
+             System.out.println("¿La fecha corresponde con la actual?(S:1 N:2)");
+             seleccion = sc.nextInt();
+             
+             switch(seleccion){
+                 case 1:{
+                     LocalDateTime now = LocalDateTime.now();                 
+                     fecha = now.getYear()+"/"+now.getMonthValue()+"/"+now.getDayOfMonth();
+                      }break;
+                 case 2:{
+                     
+                    int anho=0, mes = 0, dia = 0;
+                    boolean correcto = false;
+
+                    while(!correcto){
+                       System.out.println("Introduce el año");
+                         anho = sc.nextInt();
+                       System.out.println("mes (1-12)");
+                         mes = sc.nextInt();
+                       System.out.println("dia");
+                         dia = sc.nextInt();
+
+                       try {
+                           //Formato de fecha (día/mes/año)
+                           SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+                           formatoFecha.setLenient(false);
+                           //Comprobación de la fecha
+                           formatoFecha.parse(anho + "/" + mes + "/" + dia);
+                           correcto = true;
+                           fecha = anho + "/" + mes + "/" + dia;
+                       } catch (ParseException e) {
+                           //Si la fecha no es correcta, pasará por aquí
+                           System.out.println("Fecha en foramto incorrecto.");
+                           correcto = false;
+                       }                 
+                    }  
+                 }break;
+                 default:
+                     System.out.println("Introduce 1 o 2 para seleccionar el menú");
+             }      
+        return fecha;
     }
 }
