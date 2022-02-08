@@ -39,7 +39,7 @@ public class Empresa {
         ent.close();
     }
 
-    private static void borrarTablaDept() {
+    private static void delDept() {
     }
 
     private static void mostrarTablaDept() {
@@ -140,6 +140,7 @@ public class Empresa {
             System.out.println("Introduce una opcion(1-7)");
             opcion=ent.nextInt();
         }while(opcion<1||opcion>7);
+
         return opcion;
     }
 }
