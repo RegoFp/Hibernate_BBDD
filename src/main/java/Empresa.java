@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -52,7 +53,7 @@ public class Empresa {
 
         int index  = 1;//Esta forma de hacer el for no devuelve la posicion
         for(dept depto: list){   
-            System.out.println(index +" "+ depto.getDname()+" "+ depto.getLoc());
+            System.out.println(depto.getDeptno() +" "+ depto.getDname()+" "+ depto.getLoc());
             index += 1;
         }
 
@@ -69,13 +70,21 @@ public class Empresa {
         }
     }
 
-    //TODO comprobar si existe antes de borrar
+   
     private static void borrarTablaEmp(Scanner ent) {
         int id;
         System.out.println("Introduce el usuario que quieres borrar");
         id= ent.nextInt();  //TODO asegurar entrada
         emp emplead = bd.getEmp(id);
-        bd.delEmp(emplead);
+
+        //Comprueba que exista
+        if(Objects.isNull(emplead)){
+            System.out.println("Ese empleado no existe, no se pudo borrar");
+        }else{
+            bd.delEmp(emplead); //TODO pedir confirmacion
+            System.out.println("Empleado borrado");
+        }
+
 
 
     }
@@ -85,13 +94,20 @@ public class Empresa {
         System.out.println("Introduce el departamento que quieres borrar");
         id= ent.nextInt();  //TODO asegurar entrada
         dept deptno = bd.getDept(id);
-        bd.delDept(deptno);
+
+        if(Objects.isNull(deptno)){
+            System.out.println("Ese departamento no existe, no se pudo borrar");
+        }else{
+            bd.delDept(deptno); //TODO perdir confirmacion
+            System.out.println("Departamento borrado");
+        }
+
     }
 
     
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
-        
+        //El deptno se autoasigna
         System.out.println("Tabla DEPTNO");
         
         System.out.print("\nIntroduce el nombre ");
@@ -105,8 +121,6 @@ public class Empresa {
     }
 
 
-     //TODO asegurase que la clave foranea se cumple 
-     //TODO Comprobar que es no existe ya
      //Asegurar todas las entradas
      private static void insertarTablaEmp(Scanner ent){
         Scanner sc=ent;
@@ -168,13 +182,14 @@ public class Empresa {
         System.out.print("Departamento?\n");
         
 
-        do{// Solo deja introducir un empleado que exista
+        do{// Solo deja introducir un departamento que exista
             unique = true;
             deptno=sc.nextInt();
             sc.nextLine();
             checkDept = bd.getDept(deptno);
 
-            if(checkEmp==null){
+
+            if(Objects.isNull(checkDept)){
                 System.out.println("Ese departamento no existe, introduce un departamento que exista:");
                 unique = false;
             }
@@ -239,10 +254,10 @@ public class Empresa {
         int opcion;
         System.out.println("Menu");
 
-        System.out.println("1. Insertar tabla DEPT");
-        System.out.println("2. Insertar tabla EMP");
-        System.out.println("3. Borrar tabla DEPT");
-        System.out.println("4. Borrar tabla EMP");
+        System.out.println("1. Insertar en tabla DEPT");
+        System.out.println("2. Insertar en tabla EMP");
+        System.out.println("3. Borrar de tabla DEPT");
+        System.out.println("4. Borrar de tabla EMP");
         System.out.println("5. Mostrar tabla DEPT");
         System.out.println("6. Mostrar tabla EMP");
         System.out.println("7. Salir");
