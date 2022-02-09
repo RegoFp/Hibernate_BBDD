@@ -113,7 +113,9 @@ public class Empresa {
         String name, job,fecha;
         int id,deptno;
         float sal, comm, mrg;
+
         emp checkEmp = null;
+        dept checkDept = null;
         
         boolean unique = false; //Comprueba si el empleado ya existia.
 
@@ -121,7 +123,7 @@ public class Empresa {
         
         System.out.print("ID?\n");
 
-        do{
+        do{ //Solo deja usar un ID que no este en uso
             unique = true;
             id=sc.nextInt();
             sc.nextLine();
@@ -139,9 +141,20 @@ public class Empresa {
         System.out.print("Introduce el trabajo \n");
         job=sc.nextLine();
         
-        System.out.print("Jefe de ?\n");
-        mrg=sc.nextFloat();
-        sc.nextLine();
+        System.out.print("Introduce su jefe\n");
+       
+        do{// Solo deja introducir un empleado que exista
+            unique = true;
+            mrg=sc.nextFloat();
+            sc.nextLine();
+            checkEmp = bd.getEmp((int) mrg);
+
+            if(checkEmp==null){
+                System.out.println("Ese usuario no existe, introduce un empleado que exista");
+                unique = false;
+            }
+        }while(!unique);
+
 
         //Validar fecha
         fecha = validacionFecha(sc);
@@ -153,8 +166,20 @@ public class Empresa {
         comm=sc.nextFloat();
         
         System.out.print("Departamento?\n");
-        deptno=sc.nextInt();
-        sc.nextLine();
+        
+
+        do{// Solo deja introducir un empleado que exista
+            unique = true;
+            deptno=sc.nextInt();
+            sc.nextLine();
+            checkDept = bd.getDept(deptno);
+
+            if(checkEmp==null){
+                System.out.println("Ese departamento no existe, introduce un departamento que exista:");
+                unique = false;
+            }
+        }while(!unique);
+
 
         emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
         bd.postEmp(empto);
