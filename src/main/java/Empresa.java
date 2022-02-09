@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 
 public class Empresa {
+    //Definimos la conexión con la base de datos
     static BBDD bd = new BBDD();
 
     public static void main(String []args){
@@ -50,11 +51,11 @@ public class Empresa {
         ent.close();
     }
 
+    //Mostramos la tabla Dept
     private static void mostrarTablaDept() {
-
         List<dept> list = bd.showDept();
-
         int index  = 1;//Esta forma de hacer el for no devuelve la posicion
+        
         for(dept depto: list){   
             System.out.println(depto.getDeptno() +" "+ depto.getDname()+" "+ depto.getLoc());
             index += 1;
@@ -63,6 +64,7 @@ public class Empresa {
 
     }
 
+    //Mostramos la tabla Emp
     private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
 
@@ -73,25 +75,23 @@ public class Empresa {
         }
     }
 
-   
+    //Borramos un usuario de la tabla emp
     private static void borrarTablaEmp(Scanner ent) {
         int id;
         System.out.println("Introduce el usuario que quieres borrar");
         id= ent.nextInt();  //TODO asegurar entrada
         emp emplead = bd.getEmp(id);
 
-        //Comprueba que exista
+        //Comprueba que existe
         if(Objects.isNull(emplead)){
             System.out.println("Ese empleado no existe, no se pudo borrar");
         }else{
             bd.delEmp(emplead); //TODO pedir confirmacion
             System.out.println("Empleado borrado");
         }
-
-
-
     }
 
+    //Eliminamos un departamento de la tabla dept
     private static void borrarTablaDept(Scanner ent) {
         int id;
         System.out.println("Introduce el departamento que quieres borrar");
@@ -104,10 +104,9 @@ public class Empresa {
             bd.delDept(deptno); //TODO perdir confirmacion
             System.out.println("Departamento borrado");
         }
-
     }
 
-    
+    //Insertamos departamento en la tabla dept
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
         //El deptno se autoasigna
@@ -123,8 +122,7 @@ public class Empresa {
         
     }
 
-
-     //Asegurar todas las entradas
+     //Insertamos empleado en la tabla emp
      private static void insertarTablaEmp(Scanner ent){
         Scanner sc=ent;
         String name, job,fecha;
@@ -133,14 +131,15 @@ public class Empresa {
 
         emp checkEmp = null;
         dept checkDept = null;
-        
-        boolean unique = false; //Comprueba si el empleado ya existia.
+        //Comprueba si el empleado ya existía
+        boolean unique = false; 
 
         System.out.println("Tabla EMP\n");
         
         System.out.print("ID?\n");
 
-        do{ //Solo deja usar un ID que no este en uso
+         //Solo deja usar un ID que no este en uso
+        do{ 
             unique = true;
             id=sc.nextInt();
             sc.nextLine();
@@ -159,8 +158,9 @@ public class Empresa {
         job=sc.nextLine();
         
         System.out.print("Introduce su jefe\n");
-       
-        do{// Solo deja introducir un empleado que exista
+         
+       // Solo deja introducir un empleado que exista
+        do{
             unique = true;
             mrg=sc.nextFloat();
             sc.nextLine();
@@ -173,7 +173,7 @@ public class Empresa {
         }while(!unique);
 
 
-        //Validar fecha
+        //Validamos la fecha
         fecha = validacionFecha(sc);
         
         System.out.print("Introduce el salario\n");
@@ -184,14 +184,13 @@ public class Empresa {
         
         System.out.print("Departamento?\n");
         
-
-        do{// Solo deja introducir un departamento que exista
+        // Solo deja introducir un departamento que exista
+        do{
             unique = true;
             deptno=sc.nextInt();
             sc.nextLine();
+
             checkDept = bd.getDept(deptno);
-
-
             if(Objects.isNull(checkDept)){
                 System.out.println("Ese departamento no existe, introduce un departamento que exista:");
                 unique = false;
@@ -201,10 +200,9 @@ public class Empresa {
 
         emp empto = new emp(id,name, job, mrg, fecha, sal, comm, deptno);
         bd.postEmp(empto);
-        
-
     }
-  
+    
+    //Validamos la fecha introducida
     public static String validacionFecha(Scanner sc){
         String fecha = null;
         int seleccion;
@@ -239,7 +237,6 @@ public class Empresa {
                            correcto = true;
                            fecha = anho + "/" + mes + "/" + dia;
                        } catch (ParseException e) {
-                           //Si la fecha no es correcta, pasará por aquí
                            System.out.println("Fecha en foramto incorrecto.");
                            correcto = false;
                        }                 
@@ -251,6 +248,7 @@ public class Empresa {
         return fecha;
     }
 
+    //Cambiamos el departamento de un empleado
     public static void cambiarDeptdeEmp(Scanner ent){
         int id;
         System.out.println("Introduce el empleado que quieres modificar");
@@ -273,11 +271,10 @@ public class Empresa {
 
     }
 
-
+    //Creación del menú
     public static int menu(Scanner ent){
         int opcion;
         System.out.println("Menu");
-
         System.out.println("1. Insertar en tabla DEPT");
         System.out.println("2. Insertar en tabla EMP");
         System.out.println("3. Borrar de tabla DEPT");
@@ -287,7 +284,7 @@ public class Empresa {
         System.out.println("7. Cambiar empleado de departamento");
         System.out.println("8. Salir");
 
-        do {  //TODO asegurar que la entrada sea un numero
+        do {
             System.out.println("Introduce una opcion(1-8)");
             opcion=ent.nextInt();
             ent.nextLine();
