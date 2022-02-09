@@ -4,12 +4,16 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
+
+
+
 public class Empresa {
     static BBDD bd = new BBDD();
 
     public static void main(String []args){
         Scanner ent=new Scanner(System.in);
         int opcion=0;
+
         do{
             opcion=menu(ent);
             switch(opcion){
@@ -20,7 +24,7 @@ public class Empresa {
                     insertarTablaEmp(ent);
                     break;
                 case 3:
-                    borrarTablaDept();
+                    borrarTablaDept(ent);
                     break;
                 case 4:
                     borrarTablaEmp(ent);
@@ -38,11 +42,8 @@ public class Empresa {
 
 
             }
-        }while(opcion!=5);
+        }while(opcion!=7);
         ent.close();
-    }
-
-    private static void delDept() {
     }
 
     private static void mostrarTablaDept() {
@@ -61,9 +62,9 @@ public class Empresa {
     private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
 
-        System.out.println("Comm    Deptno  Emp    Name");
+        System.out.println("Empno Comm    Deptno  Emp    Name");
         for(emp empl: list){   
-            System.out.println(empl.getComm()+" "+empl.getDeptno()+" "+empl.getEmpno()+" "+empl.getEname());
+            System.out.println(empl.getEmpno() +" "+ empl.getComm()+" "+empl.getDeptno()+" "+empl.getEmpno()+" "+empl.getEname());
        
         }
     }
@@ -79,8 +80,12 @@ public class Empresa {
 
     }
 
-    private static void borrarTablaDept() {
-        bd.delDept();
+    private static void borrarTablaDept(Scanner ent) {
+        int id;
+        System.out.println("Introduce el departamento que quieres borrar");
+        id= ent.nextInt();  //TODO asegurar entrada
+        dept deptno = bd.getDept(id);
+        bd.delDept(deptno);
     }
 
     
@@ -108,13 +113,25 @@ public class Empresa {
         String name, job,fecha;
         int id,deptno;
         float sal, comm, mrg;
- 
+        emp checkEmp = null;
         
+        boolean unique = false; //Comprueba si el empleado ya existia.
+
         System.out.println("Tabla EMP\n");
         
         System.out.print("ID?\n");
-        id=sc.nextInt();
-        sc.nextLine();
+
+        do{
+            unique = true;
+            id=sc.nextInt();
+            sc.nextLine();
+
+            checkEmp = bd.getEmp(id);
+            if(checkEmp!=null){
+                System.out.println("Ese usuario ya existe, introduce un id sin usar");
+                unique = false;
+            }
+        }while(!unique);
         
         System.out.print("Introduce el nombre \n");
         name=sc.nextLine();
@@ -144,6 +161,7 @@ public class Empresa {
         
 
     }
+  
     public static String validacionFecha(Scanner sc){
         String fecha = null;
         int seleccion;

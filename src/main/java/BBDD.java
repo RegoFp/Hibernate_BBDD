@@ -97,23 +97,25 @@ public class BBDD{
     }
 
     //No se como hacer por que la clave primania ni la damos ni la recibimos por que se autogenera
-    public dept getDept(){
-        return null;
+    public dept getDept(int deptno){
+        
+        HibernateUtil.buildSessionFactory();
+        Session session = HibernateUtil.getCurrentSession();
+
+        dept dept = HibernateUtil.getCurrentSession().get(dept.class, deptno);
+        return dept;
+
     }
 
 
     //Eliminar cosas------------------------------------------------------------------------------------------------------
 
     //TODO Busqueda de dept, para que devulva solo 1 dept, para que el usuario solo tenga que introducir el id
-    public void delDept(){
+    public void delDept(dept deptno){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
-        String sql = "DELETE FROM dept";
-        Query query = session.createQuery(sql);
-        int row = query.executeUpdate();
-        if (row != 0)
-            System.out.println("Tabla eliminada");
+        session.delete(deptno);
         session.getTransaction().commit();
         session.close();
     }
