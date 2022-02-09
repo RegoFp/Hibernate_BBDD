@@ -37,6 +37,9 @@ public class Empresa {
                     mostrarTablaEmp();
                     break;
                 case 7:
+                    cambiarDeptdeEmp(ent);
+                    break;
+                case 8:
                     System.out.println("Fin del programa");
                 default:
                     break;
@@ -248,6 +251,27 @@ public class Empresa {
         return fecha;
     }
 
+    public static void cambiarDeptdeEmp(Scanner ent){
+        int id;
+        System.out.println("Introduce el empleado que quieres modificar");
+        id= ent.nextInt();  //TODO asegurar entrada    
+        ent.nextLine();
+
+        int dept;
+
+        //TODO comprobar que exista
+        //Imprimir en pantalla sus datos
+
+        emp empl = bd.getEmp(id);
+
+        dept = ent.nextInt();
+        ent.nextLine();
+        //Comprobar que exista
+
+        empl.setDeptno(dept);   
+        //Hacer update
+
+    }
 
 
     public static int menu(Scanner ent){
@@ -260,14 +284,15 @@ public class Empresa {
         System.out.println("4. Borrar de tabla EMP");
         System.out.println("5. Mostrar tabla DEPT");
         System.out.println("6. Mostrar tabla EMP");
-        System.out.println("7. Salir");
+        System.out.println("7. Cambiar empleado de departamento");
+        System.out.println("8. Salir");
 
         do {  //TODO asegurar que la entrada sea un numero
-            System.out.println("Introduce una opcion(1-7)");
+            System.out.println("Introduce una opcion(1-8)");
             opcion=ent.nextInt();
             ent.nextLine();
-        }while(opcion<1||opcion>7);
-
+        }while(opcion<1||opcion>8);
+    
         return opcion;
     }
 }

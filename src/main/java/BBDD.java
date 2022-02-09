@@ -83,6 +83,11 @@ public class BBDD{
         
     }
 
+    public void updateEmp(emp empleado){
+        HibernateUtil.buildSessionFactory();
+        Session session = HibernateUtil.getCurrentSession();
+        session.update(empleado);
+    }
 
     //Mostrar solo 1 cosa------------------------------------------------------------------------------------
 
