@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//Creación de las variables en relacióna a cada columna
+//de la tabla de datos, emp
 @Entity
 @Table(name = "EMP")
 public class emp {
@@ -26,10 +28,13 @@ public class emp {
     @Column(name = "deptno")
     private int deptno;
 
+    //Creación de los constructores
+    //Constructor vacío
     public emp() {
     }
 
-    public emp (int empno, String ename, String job, Float mgr, String hiredate, Float sal, Float comm, int deptno){
+    public emp (int empno, String ename, String job, Float mgr, 
+                String hiredate, Float sal, Float comm, int deptno){
         this.empno=empno;
         this.ename=ename;
         this.job=job;
@@ -39,52 +44,60 @@ public class emp {
         this.comm=comm;
         this.deptno=deptno;
     }
-
+    
+    //Setters y Getters
+    //set y get empno
     public int getEmpno(){
         return empno;
     }
-    public String getEname(){
-        return ename;
-    }
-    public String getJob(){
-        return job;
-    }
-    public Float getMgr(){
-        return mgr;
-    }
-    public String getHiredate(){
-        return hiredate;
-    }
-    public Float getSal(){
-        return sal;
-    }
-    public Float getComm(){
-        return comm;
-    }
-    public float getDeptno(){
-        return deptno;
-    }
-    
     public void setEmpno(int _empno){
         empno=_empno;
+    }
+    //et y get ename
+    public String getEname(){
+        return ename;
     }
     public void setEname(String _ename){
         this.ename=_ename;
     }
+    //set y get job
+    public String getJob(){
+        return job;
+    }
     public void setJob(String _job){
         job=_job;
+    }
+    //set y get mrg
+    public Float getMgr(){
+        return mgr;
     }
     public void setMgr(Float _mgr){
         mgr=_mgr;
     }
+    //set y get hiredate
+    public String getHiredate(){
+        return hiredate;
+    }
     public void setHiredate(String _hiredate){
         hiredate=_hiredate;
+    }
+    //set y get sal
+    public Float getSal(){
+        return sal;
     }
     public void setSal(float _sal){
         sal=_sal;
     }
+    //set y get comm
+    public Float getComm(){
+        return comm;
+    }
     public void setComm(float _comm){
         comm=_comm;
+    }
+    //set y get depno
+    public float getDeptno(){
+        return deptno;
     }
     public void setDeptno(int _deptno){
         deptno=_deptno;
