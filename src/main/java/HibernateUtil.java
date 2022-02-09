@@ -10,27 +10,15 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
-
+  //Definimos las variables
   private static SessionFactory sessionFactory;
   private static Session session;
 	
-
-  
-  /**
-   *<property name="hibernate.connection.driver_class"></property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost/basededatos</property>
-    <property name="hibernate.connection.username">usuario</property>
-    <property name="hibernate.connection.password">contraseña</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-    <property name="hibernate.show_sql">true</property>
-   * 
-   * Crea la factoria de sesiones
-   */
+  //Creamos la factoría de sesiones
   public static void buildSessionFactory() {
 
     Properties properties = new Properties();
-    properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-    //properties.put(Environment.DRIVER, "com.mysql.jdbc.Driver");      
+    properties.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");     
     properties.put(Environment.URL, "jdbc:mysql://database-1.cvliipm1ojas.eu-west-2.rds.amazonaws.com/sys");
     properties.put(Environment.USER, "admin");
     properties.put(Environment.PASS, "administrador");
@@ -42,28 +30,22 @@ public class HibernateUtil {
     configuration.setProperties(properties);
     configuration.configure();
 
-    // Se registran las clases que hay que mapear con cada tabla de la base de datos
+    //Se registran las clases que hay que mapear con cada tabla de la base de datos
     configuration.addAnnotatedClass(dept.class);
     configuration.addAnnotatedClass(emp.class);
     
     ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-      configuration.getProperties()).build();
+    configuration.getProperties()).build();
     sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
   }
 	
-  /**
-   * Abre una nueva sesión
-   */
+  //Abrimos nueva sesión
   public static void openSession() {
     session = sessionFactory.openSession();
   }
 	
-  /**
-   * Devuelve la sesión actual
-   * @return
-   */
-  
+  //Devolvemos la sesión actual
   public static Session getCurrentSession() {
 	
     if ((session == null) || (!session.isOpen()))
@@ -72,9 +54,7 @@ public class HibernateUtil {
     return session;
   }
 	
-  /**
-   * Cierra Hibernate
-   */
+  //Cerramos hibernate
   public static void closeSessionFactory() {
 	
     if (session != null)
