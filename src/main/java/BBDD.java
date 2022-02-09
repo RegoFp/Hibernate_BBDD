@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,12 +13,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 public class BBDD{
+    //Introducimos valores
 
-    //Meter cosas----------------------------------------------------
-
-    //Meter departamento FUNCIONA NO TOCAR
+    //Introducimos departamento
     public void postDept( dept depto){
-
         HibernateUtil.buildSessionFactory();
 
         Session session = HibernateUtil.getCurrentSession();
@@ -31,9 +28,10 @@ public class BBDD{
         session.close();
     }
     
-    //Meter empleado FUNCIONA NO TOCAR
+    //Introducimos empleado
     public void postEmp(emp empl){
         HibernateUtil.buildSessionFactory();
+        
         Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
 
@@ -44,9 +42,11 @@ public class BBDD{
 
     }
 
-    //Mostrar cosas ----------------------------------------------------------
-
+    
+    //Mostramos valores
+    
     //https://www.baeldung.com/hibernate-select-all
+    //Mostramos departamentos
     public List<dept> showDept(){
         
         HibernateUtil.buildSessionFactory();
@@ -59,17 +59,13 @@ public class BBDD{
         
         TypedQuery<dept> allQuery = session.createQuery(all);
         return allQuery.getResultList();
-
-
         //metodo simple
         //return session.createQuery("select a FROM dept a",dept.class).getResultList();
-        
-
     }
 
     //TODO no funciona
+    //Mostramos empleados
     public List<emp> showEmp(){
- 
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
 
@@ -82,16 +78,19 @@ public class BBDD{
         return allQuery.getResultList();
         
     }
-
+    
+    
+    //Actualizamos la tabla emp
     public void updateEmp(emp empleado){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
         session.update(empleado);
     }
 
-    //Mostrar solo 1 cosa------------------------------------------------------------------------------------
+    
+    //Mostramos 1 solo valor
 
-    //Devuelve 1 solo empleado
+    //Mostramos 1 solo empleado
     public emp getEmp(int empno){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
@@ -101,7 +100,7 @@ public class BBDD{
 
     }
 
-    //No se como hacer por que la clave primania ni la damos ni la recibimos por que se autogenera
+    //Mostramos 1 solo departamento
     public dept getDept(int deptno){
         
         HibernateUtil.buildSessionFactory();
@@ -113,26 +112,31 @@ public class BBDD{
     }
 
 
-    //Eliminar cosas------------------------------------------------------------------------------------------------------
+    //Eliminar elementos
 
-    //TODO Busqueda de dept, para que devulva solo 1 dept, para que el usuario solo tenga que introducir el id
+    //Eliminamos departamento
     public void delDept(dept deptno){
         HibernateUtil.buildSessionFactory();
+        
         Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
+        
         session.delete(deptno);
         session.getTransaction().commit();
+        
         session.close();
     }
 
+    //Eliminados empleado
     public void delEmp(emp empl){
-
         HibernateUtil.buildSessionFactory();
+        
         Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
+        
         session.delete(empl);
         session.getTransaction().commit();
+        
         session.close();
     }
-
 }
