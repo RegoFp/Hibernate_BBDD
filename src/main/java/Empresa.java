@@ -1,7 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -47,18 +46,16 @@ public class Empresa {
 
 
             }
-        }while(opcion!=7);
+        }while(opcion!=8);
         ent.close();
     }
 
     //Mostramos la tabla Dept
     private static void mostrarTablaDept() {
         List<dept> list = bd.showDept();
-        int index  = 1;//Esta forma de hacer el for no devuelve la posicion
         
         for(dept depto: list){   
             System.out.println(depto.getDeptno() +" "+ depto.getDname()+" "+ depto.getLoc());
-            index += 1;
         }
 
 
@@ -254,19 +251,41 @@ public class Empresa {
         System.out.println("Introduce el empleado que quieres modificar");
         id= ent.nextInt();  //TODO asegurar entrada    
         ent.nextLine();
-
+        dept deptno;
         int dept;
 
-        //TODO comprobar que exista
-        //Imprimir en pantalla sus datos
+        
 
         emp empl = bd.getEmp(id);
 
-        dept = ent.nextInt();
-        ent.nextLine();
-        //Comprobar que exista
+        if(Objects.isNull(empl)){
+            System.out.println("Ese empleado no existe");
+        }else{
+            System.out.println(empl.getEname() + " " + empl.getDeptno());
+            System.out.println("Nuevo departamento:");
 
-        empl.setDeptno(dept);   
+            dept = ent.nextInt();
+            ent.nextLine();
+
+            deptno = bd.getDept(dept);
+            
+             //Comprobar que exista
+            if (Objects.isNull(deptno)){
+                System.out.print("Ese departamento no existe.");
+            }else{
+                //Hacer update
+                empl.setDeptno(dept); 
+                bd.updateEmp(empl);
+               
+            }
+
+        }
+
+      
+        
+       
+
+          
         //Hacer update
 
     }

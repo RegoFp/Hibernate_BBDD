@@ -1,4 +1,3 @@
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +25,7 @@ public class emp {
     @Column(name = "comm")
     private Float comm;
     @Column(name = "deptno")
-    private int deptno;
+    private Integer deptno;
 
     //Creación de los constructores
     //Constructor vacío
@@ -34,7 +33,7 @@ public class emp {
     }
 
     public emp (int empno, String ename, String job, Float mgr, 
-                String hiredate, Float sal, Float comm, int deptno){
+                String hiredate, Float sal, Float comm, Integer deptno){
         this.empno=empno;
         this.ename=ename;
         this.job=job;
@@ -96,10 +95,10 @@ public class emp {
         comm=_comm;
     }
     //set y get depno
-    public float getDeptno(){
+    public Integer getDeptno(){
         return deptno;
     }
-    public void setDeptno(int _deptno){
+    public void setDeptno(Integer _deptno){
         deptno=_deptno;
     }
 }

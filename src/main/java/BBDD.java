@@ -63,7 +63,6 @@ public class BBDD{
         //return session.createQuery("select a FROM dept a",dept.class).getResultList();
     }
 
-    //TODO no funciona
     //Mostramos empleados
     public List<emp> showEmp(){
         HibernateUtil.buildSessionFactory();
@@ -84,7 +83,11 @@ public class BBDD{
     public void updateEmp(emp empleado){
         HibernateUtil.buildSessionFactory();
         Session session = HibernateUtil.getCurrentSession();
+
+        session.beginTransaction();
         session.update(empleado);
+        session.getTransaction().commit();
+        session.close();
     }
 
     
@@ -96,6 +99,7 @@ public class BBDD{
         Session session = HibernateUtil.getCurrentSession();
 
         emp emp = HibernateUtil.getCurrentSession().get(emp.class, empno);
+        session.close();
         return emp;
 
     }
@@ -107,6 +111,7 @@ public class BBDD{
         Session session = HibernateUtil.getCurrentSession();
 
         dept dept = HibernateUtil.getCurrentSession().get(dept.class, deptno);
+        session.close();
         return dept;
 
     }
