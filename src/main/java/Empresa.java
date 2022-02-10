@@ -40,13 +40,19 @@ public class Empresa {
                     cambiarDeptdeEmp(ent);
                     break;
                 case 8:
+                    mostrarDept(ent);
+                    break;
+                case 9:
+                    mostrarEmp(ent);
+                    break;
+                case 10:
                     System.out.println("Fin del programa");
                 default:
                     break;
 
 
             }
-        }while(opcion!=8);
+        }while(opcion!=10);
         ent.close();
     }
 
@@ -254,8 +260,6 @@ public class Empresa {
         dept deptno;
         int dept;
 
-        
-
         emp empl = bd.getEmp(id);
 
         if(Objects.isNull(empl)){
@@ -276,17 +280,53 @@ public class Empresa {
                 //Hacer update
                 empl.setDeptno(dept); 
                 bd.updateEmp(empl);
-               
+              
             }
+        }
+    }
+
+
+    public static void mostrarEmp(Scanner ent){
+        int id;
+        emp empl;
+
+        System.out.println("Que empleado quieres ver: ");
+
+        //TODO asegurar que sea numero
+        id = ent.nextInt();
+        ent.nextLine();
+
+        empl = bd.getEmp(id);
+
+        if(Objects.isNull(empl)){
+            System.out.println("Ese empleado no existe ");
+        }else{
+            System.out.println("nº   Nombre   Fecha de contrato   Trabajo");
+            System.out.println(empl.getEmpno() + " " + empl.getEname() + " " + empl.getHiredate() + " " + empl.getJob());
 
         }
 
-      
-        
-       
+    }
 
-          
-        //Hacer update
+    public static void mostrarDept(Scanner ent){
+        int id;
+        dept deptno;
+
+        System.out.println("Que departamento quieres ver: ");
+
+        //TODO asegurar que sea numero
+        id = ent.nextInt();
+        ent.nextLine();
+
+        deptno = bd.getDept(id);
+
+        if(Objects.isNull(deptno)){
+            System.out.println("Ese departamento no existe ");
+        }else{
+            System.out.println("nº   Nombre   Ubicacion");
+            System.out.println(deptno.getDeptno() + " " + deptno.getDname() + " " + deptno.getLoc());
+
+        }
 
     }
 
@@ -301,13 +341,15 @@ public class Empresa {
         System.out.println("5. Mostrar tabla DEPT");
         System.out.println("6. Mostrar tabla EMP");
         System.out.println("7. Cambiar empleado de departamento");
-        System.out.println("8. Salir");
+        System.out.println("8. Mostrar departamento");
+        System.out.println("9. Mostrar empleado");
+        System.out.println("10. Salir");
 
         do {
-            System.out.println("Introduce una opcion(1-8)");
+            System.out.println("Introduce una opcion(1-10)");
             opcion=ent.nextInt();
             ent.nextLine();
-        }while(opcion<1||opcion>8);
+        }while(opcion<1||opcion>10);
     
         return opcion;
     }
