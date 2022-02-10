@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -78,33 +79,55 @@ public class Empresa {
         }
     }
 
-    //Borramos un usuario de la tabla emp
+    //Eliminamos un usuario de la tabla emp
     private static void borrarTablaEmp(Scanner ent) {
-        int id;
-        System.out.println("Introduce el usuario que quieres borrar");
-        id= ent.nextInt();  //TODO asegurar entrada
+        int id=0;
+        boolean continua;
+        do {
+            try {
+                continua=false;
+                System.out.println("Introduce el empleado que quieres borrar");
+                id = ent.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Introduce un número");
+                ent.next();
+                continua=true;
+            }
+        }while(continua);
+
         emp emplead = bd.getEmp(id);
 
         //Comprueba que existe
         if(Objects.isNull(emplead)){
             System.out.println("Ese empleado no existe, no se pudo borrar");
         }else{
-            bd.delEmp(emplead); //TODO pedir confirmacion
+            bd.delEmp(emplead);
             System.out.println("Empleado borrado");
         }
     }
 
     //Eliminamos un departamento de la tabla dept
     private static void borrarTablaDept(Scanner ent) {
-        int id;
-        System.out.println("Introduce el departamento que quieres borrar");
-        id= ent.nextInt();  //TODO asegurar entrada
+        int id=0;
+        boolean continua;
+        do {
+            try {
+                continua=false;
+                System.out.println("Introduce el departamento que quieres borrar");
+                id = ent.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Introduce un número");
+                ent.next();
+                continua=true;
+            }
+        }while(continua);
+
         dept deptno = bd.getDept(id);
 
         if(Objects.isNull(deptno)){
             System.out.println("Ese departamento no existe, no se pudo borrar");
         }else{
-            bd.delDept(deptno); //TODO perdir confirmacion
+            bd.delDept(deptno);
             System.out.println("Departamento borrado");
         }
     }
@@ -117,7 +140,7 @@ public class Empresa {
         
         System.out.print("\nIntroduce el nombre ");
         name=sc.nextLine();
-        System.out.print("\nIntroduce la locación ");
+        System.out.print("\nIntroduce la localización ");
         loc=sc.nextLine();
         
         dept depto = new dept(name, loc);
@@ -160,7 +183,7 @@ public class Empresa {
         System.out.print("Introduce el trabajo \n");
         job=sc.nextLine();
         
-        System.out.print("Introduce su jefe\n");
+        System.out.print("Introduce el código de su jefe\n");
          
        // Solo deja introducir un empleado que exista
         do{
@@ -253,10 +276,19 @@ public class Empresa {
 
     //Cambiamos el departamento de un empleado
     public static void cambiarDeptdeEmp(Scanner ent){
-        int id;
-        System.out.println("Introduce el empleado que quieres modificar");
-        id= ent.nextInt();  //TODO asegurar entrada    
-        ent.nextLine();
+        int id=0;
+        boolean continua;
+        do {
+            try {
+                continua=false;
+                System.out.println("Introduce el departamento que quieres borrar");
+                id = ent.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Introduce un número");
+                ent.next();
+                continua=true;
+            }
+        }while(continua);
         dept deptno;
         int dept;
 
@@ -287,13 +319,20 @@ public class Empresa {
 
 
     public static void mostrarEmp(Scanner ent){
-        int id;
+        int id=0;
         emp empl;
-
-        System.out.println("Que empleado quieres ver: ");
-
-        //TODO asegurar que sea numero
-        id = ent.nextInt();
+        boolean continua;
+        do {
+            try {
+                continua=false;
+                System.out.println("Introduce el empleado que quieres mostrar: ");
+                id = ent.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Introduce un número");
+                ent.next();
+                continua=true;
+            }
+        }while(continua);
         ent.nextLine();
 
         empl = bd.getEmp(id);
@@ -309,15 +348,20 @@ public class Empresa {
     }
 
     public static void mostrarDept(Scanner ent){
-        int id;
+        int id=0;
         dept deptno;
-
-        System.out.println("Que departamento quieres ver: ");
-
-        //TODO asegurar que sea numero
-        id = ent.nextInt();
-        ent.nextLine();
-
+        boolean continua;
+        do {
+            try {
+                continua=false;
+                System.out.println("Introduce el departamento que quieres mostrar: ");
+                id = ent.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Introduce un número");
+                ent.next();
+                continua=true;
+            }
+        }while(continua);
         deptno = bd.getDept(id);
 
         if(Objects.isNull(deptno)){
@@ -346,8 +390,12 @@ public class Empresa {
         System.out.println("10. Salir");
 
         do {
-            System.out.println("Introduce una opcion(1-10)");
-            opcion=ent.nextInt();
+            try{
+                System.out.println("Introduce una opcion(1-10)");
+                opcion= ent.nextInt();
+            }catch (InputMismatchException e){
+                System.out.println("Introduce un número");
+                opcion=0;}
             ent.nextLine();
         }while(opcion<1||opcion>10);
     
