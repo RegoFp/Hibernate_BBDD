@@ -9,7 +9,7 @@
 El repositorio se ha creado para poder desarrollar un trabajo de la asignatura Acceso a Datos.
 Se puede clonar y examinar el código. Si los cambios se consideran oportunos, se hará merge con la rama principal.
 
-Integrantes:
+### Integrantes:
   - [Daniel Rego](https://github.com/RegoFp)
   - [Enrique Rivas](https://github.com/enriquerivasf)
   - [Rocío Seoane](https://github.com/rocioseoane)
