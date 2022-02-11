@@ -156,7 +156,7 @@ public class Empresa {
      private static void insertarTablaEmp(Scanner ent){
         Scanner sc=ent;
         String name, job,fecha;
-        int id,deptno;
+        int id,deptno=0;
         float sal, comm, mrg;
 
         emp checkEmp = null;
@@ -211,13 +211,24 @@ public class Empresa {
         
         System.out.print("Introduce el comm\n");
         comm=sc.nextFloat();
-        
-        System.out.print("Departamento?\n");
+
         
         // Solo deja introducir un departamento que exista
         do{
             unique = true;
-            deptno=sc.nextInt();
+            boolean continua;
+            do {
+                try {
+                    continua=false;
+                    System.out.print("Departamento?\n");
+                    deptno=sc.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Introduce un número");
+                    sc.next();
+                    continua=true;
+                }
+            }while(continua);
+
             sc.nextLine();
 
             checkDept = bd.getDept(deptno);
@@ -285,7 +296,7 @@ public class Empresa {
         do {
             try {
                 continua=false;
-                System.out.println("Introduce el departamento que quieres borrar");
+                System.out.println("Introduce el ID del empleado que quieres cambiar");
                 id = ent.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Introduce un número");
