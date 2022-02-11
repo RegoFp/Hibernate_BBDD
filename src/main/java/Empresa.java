@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +17,7 @@ public class Empresa {
         Scanner ent=new Scanner(System.in);
         int opcion=0;
 
+        bd.createSession();
         do{
             opcion=menu(ent);
             switch(opcion){
@@ -54,6 +56,7 @@ public class Empresa {
 
             }
         }while(opcion!=10);
+        bd.closeSession();
         ent.close();
     }
 
@@ -71,10 +74,11 @@ public class Empresa {
     //Mostramos la tabla Emp
     private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
-
-        System.out.println("Empno Comm    Deptno  Emp    Name");
+        dept deptno;
+        System.out.println("nº   Nombre     Departamento    Ubicacion");
         for(emp empl: list){   
-            System.out.println(empl.getEmpno() +" "+ empl.getComm()+" "+empl.getDeptno()+" "+empl.getEmpno()+" "+empl.getEname());
+            deptno = bd.getDept(empl.getDeptno());
+            System.out.println(empl.getEmpno() +" "+empl.getEname()+" "+ empl.getComm()+" "+deptno.getDname()+" "+deptno.getLoc());
        
         }
     }
@@ -378,15 +382,15 @@ public class Empresa {
     public static int menu(Scanner ent){
         int opcion;
         System.out.println("Menu");
-        System.out.println("1. Insertar en tabla DEPT");
-        System.out.println("2. Insertar en tabla EMP");
-        System.out.println("3. Borrar de tabla DEPT");
-        System.out.println("4. Borrar de tabla EMP");
-        System.out.println("5. Mostrar tabla DEPT");
-        System.out.println("6. Mostrar tabla EMP");
+        System.out.println("1. Insertar departamento");
+        System.out.println("2. Insertar empleado");
+        System.out.println("3. Borrar departamento");
+        System.out.println("4. Borrar empleado");
+        System.out.println("5. Mostrar todos los departamenos");
+        System.out.println("6. Mostrar todos los empleados");
         System.out.println("7. Cambiar empleado de departamento");
-        System.out.println("8. Mostrar departamento");
-        System.out.println("9. Mostrar empleado");
+        System.out.println("8. Mostrar departamento individual");
+        System.out.println("9. Mostrar empleado individual");
         System.out.println("10. Salir");
 
         do {

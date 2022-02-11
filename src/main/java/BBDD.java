@@ -14,31 +14,39 @@ import org.hibernate.query.Query;
 
 public class BBDD{
     //Introducimos valores
+    public Session session;
+    
+
+    public void createSession(){
+        HibernateUtil.buildSessionFactory();
+        session = HibernateUtil.getCurrentSession();
+    }
+
+
+    public void closeSession(){
+        session.close();
+    }
 
     //Introducimos departamento
     public void postDept( dept depto){
-        HibernateUtil.buildSessionFactory();
-
-        Session session = HibernateUtil.getCurrentSession();
+        
         session.beginTransaction();
 
         session.save(depto);
         session.getTransaction().commit();
 
-        session.close();
+ 
     }
     
     //Introducimos empleado
     public void postEmp(emp empl){
-        HibernateUtil.buildSessionFactory();
+    
         
-        Session session = HibernateUtil.getCurrentSession();
         session.beginTransaction();
 
         session.save(empl);
         session.getTransaction().commit();
 
-        session.close();
 
     }
 
@@ -49,8 +57,6 @@ public class BBDD{
     //Mostramos departamentos
     public List<dept> showDept(){
         
-        HibernateUtil.buildSessionFactory();
-        Session session = HibernateUtil.getCurrentSession();
        
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<dept> cq = cb.createQuery(dept.class);
@@ -63,10 +69,10 @@ public class BBDD{
         //return session.createQuery("select a FROM dept a",dept.class).getResultList();
     }
 
+  
     //Mostramos empleados
     public List<emp> showEmp(){
-        HibernateUtil.buildSessionFactory();
-        Session session = HibernateUtil.getCurrentSession();
+    
 
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<emp> cq = cb.createQuery(emp.class);
@@ -81,13 +87,12 @@ public class BBDD{
     
     //Actualizamos la tabla emp
     public void updateEmp(emp empleado){
-        HibernateUtil.buildSessionFactory();
-        Session session = HibernateUtil.getCurrentSession();
+  
 
         session.beginTransaction();
         session.update(empleado);
         session.getTransaction().commit();
-        session.close();
+
     }
 
     
@@ -95,11 +100,10 @@ public class BBDD{
 
     //Mostramos 1 solo empleado
     public emp getEmp(int empno){
-        HibernateUtil.buildSessionFactory();
-        Session session = HibernateUtil.getCurrentSession();
+  
 
-        emp emp = HibernateUtil.getCurrentSession().get(emp.class, empno);
-        session.close();
+        emp emp = session.get(emp.class, empno);
+
         return emp;
 
     }
@@ -107,11 +111,9 @@ public class BBDD{
     //Mostramos 1 solo departamento
     public dept getDept(int deptno){
         
-        HibernateUtil.buildSessionFactory();
-        Session session = HibernateUtil.getCurrentSession();
 
-        dept dept = HibernateUtil.getCurrentSession().get(dept.class, deptno);
-        session.close();
+        dept dept = session.get(dept.class, deptno);
+      
         return dept;
 
     }
@@ -121,27 +123,23 @@ public class BBDD{
 
     //Eliminamos departamento
     public void delDept(dept deptno){
-        HibernateUtil.buildSessionFactory();
-        
-        Session session = HibernateUtil.getCurrentSession();
+    
         session.beginTransaction();
         
         session.delete(deptno);
         session.getTransaction().commit();
         
-        session.close();
+
     }
 
     //Eliminados empleado
     public void delEmp(emp empl){
-        HibernateUtil.buildSessionFactory();
-        
-        Session session = HibernateUtil.getCurrentSession();
+      
         session.beginTransaction();
         
         session.delete(empl);
         session.getTransaction().commit();
         
-        session.close();
+
     }
 }

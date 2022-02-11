@@ -48,6 +48,10 @@ public class dept {
         this.loc=_loc;
     }
     
+
+    public String toString(){//overriding the toString() method  
+        return deptno+" "+dname+" "+loc;  
+       }  
 }
 
 

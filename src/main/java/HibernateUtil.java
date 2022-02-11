@@ -23,7 +23,7 @@ public class HibernateUtil {
     properties.put(Environment.USER, "admin");
     properties.put(Environment.PASS, "administrador");
     properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-    properties.put(Environment.SHOW_SQL, "true");
+    properties.put(Environment.SHOW_SQL, "false");
 
 
     Configuration configuration = new Configuration();
