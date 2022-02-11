@@ -7,12 +7,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-
-
+/**
+ * Un programa que gestiona una base de una empresa
+ * @author Daniel Rego
+ * @author Gianny Seoanne
+ * @author Rocio Ufo
+ * @author Enrique Ribas
+ * @version 1.0
+ */
 public class Empresa {
     //Definimos la conexión con la base de datos
     static BBDD bd = new BBDD();
 
+
+    /**
+     * El comienzo del programa, muestra un menu con las opciones de interactuar con la BBDD
+     * @param args Array de Strings que almacena los parametros con los que se ejecuta el programa
+     */
     public static void main(String []args){
         Scanner ent=new Scanner(System.in);
         int opcion=0;
@@ -60,7 +71,10 @@ public class Empresa {
         ent.close();
     }
 
-    //Mostramos la tabla Dept
+    
+    /**
+     * Muestra el contenido de la tabla departamento
+     */
     private static void mostrarTablaDept() {
         List<dept> list = bd.showDept();
         
@@ -71,7 +85,9 @@ public class Empresa {
 
     }
 
-    //Mostramos la tabla Emp
+    /**
+     * Muestra los empleados con informacion de su departamento
+     */
     private static void mostrarTablaEmp() {
         List<emp> list = bd.showEmp();
         dept deptno;
@@ -83,7 +99,10 @@ public class Empresa {
         }
     }
 
-    //Eliminamos un usuario de la tabla emp
+    /**
+     * Elimina un elemento de la tabla empleados
+     * @param ent El Scanner utilizado para leer el usuario a eliminar
+     */
     private static void borrarTablaEmp(Scanner ent) {
         int id=0;
         boolean continua;
@@ -110,7 +129,10 @@ public class Empresa {
         }
     }
 
-    //Eliminamos un departamento de la tabla dept
+    /**
+     * Elimina un elemento de la tabla departamento
+     * @param ent  El Scanner utilizado para leer el departamento a eliminar
+     */
     private static void borrarTablaDept(Scanner ent) {
         int id=0;
         boolean continua;
@@ -136,7 +158,10 @@ public class Empresa {
         }
     }
 
-    //Insertamos departamento en la tabla dept
+    /**
+     * Añade un elemento a la tabla de departamentos
+     * @param sc  El Scanner utilizado para leer los datos del departamento a añadir
+     */
     private static void insertarTablaDeptno(Scanner sc) {
         String name, loc;
         //El deptno se autoasigna
@@ -152,7 +177,10 @@ public class Empresa {
         
     }
 
-     //Insertamos empleado en la tabla emp
+     /**
+      * Añade un elemento a la tabla de empleados
+      * @param ent El Scanner utilizado para leer los parametros a insertar
+      */
      private static void insertarTablaEmp(Scanner ent){
         Scanner sc=ent;
         String name, job,fecha;
@@ -232,7 +260,11 @@ public class Empresa {
         bd.postEmp(empto);
     }
     
-    //Validamos la fecha introducida
+    /**
+     * Pide al usuario una fecha y se asegura que este en el formato correcto
+     * @param sc  El Scanner utilizado para leer la fecha
+     * @return  Un string con la fecha en el formato apropiado para la BBDD
+     */
     public static String validacionFecha(Scanner sc){
         String fecha = null;
         int seleccion;
@@ -278,7 +310,10 @@ public class Empresa {
         return fecha;
     }
 
-    //Cambiamos el departamento de un empleado
+    /**
+     * Cambia de departamento a un empleado
+     * @param ent  El Scanner utilizado para leer el empleado a cambiar de departamento
+     */
     public static void cambiarDeptdeEmp(Scanner ent){
         int id=0;
         boolean continua;
@@ -322,6 +357,10 @@ public class Empresa {
     }
 
 
+    /**
+     * Muestra una entrada individual de la tabla empleados
+     * @param ent  El Scanner utilizado para leer el empleado a mostrar
+     */
     public static void mostrarEmp(Scanner ent){
         int id=0;
         emp empl;
@@ -351,6 +390,10 @@ public class Empresa {
 
     }
 
+    /**
+     * Muestra una entrada individual de la entrada de departamentos
+     * @param ent El Scanner utilizado para introducir el departamento a mostrar
+     */
     public static void mostrarDept(Scanner ent){
         int id=0;
         dept deptno;
@@ -378,7 +421,12 @@ public class Empresa {
 
     }
 
-    //Creación del menú
+   
+    /**
+     * Crea el menu a mostrar al usuario
+     * @param ent El Scanner utilizado para introducit la opcion del menu a la que entrar
+     * @return Un int que indica la opcion introducida por el usuario
+     */
     public static int menu(Scanner ent){
         int opcion;
         System.out.println("Menu");

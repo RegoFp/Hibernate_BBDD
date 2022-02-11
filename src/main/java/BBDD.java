@@ -17,17 +17,25 @@ public class BBDD{
     public Session session;
     
 
+    /**
+     * Crea la conexion de Hibernate con la BBDD
+     */
     public void createSession(){
         HibernateUtil.buildSessionFactory();
         session = HibernateUtil.getCurrentSession();
     }
 
-
+    /**
+     * Cierra la session de Hibernate con BBDD
+     */
     public void closeSession(){
         session.close();
     }
 
-    //Introducimos departamento
+    /**
+     * Recibe un departamento  ylo añade a la tabla departamento
+     * @param depto El departamento que añadir
+     */
     public void postDept( dept depto){
         
         session.beginTransaction();
@@ -38,7 +46,10 @@ public class BBDD{
  
     }
     
-    //Introducimos empleado
+    /**
+     * Recibe  un empleado y lo añade a la tabla departamentos
+     * @param empl el empleado a añadir
+     */
     public void postEmp(emp empl){
     
         
@@ -54,7 +65,11 @@ public class BBDD{
     //Mostramos valores
     
     //https://www.baeldung.com/hibernate-select-all
-    //Mostramos departamentos
+    
+    /**
+     * Crea una lista con los departamentos de la tabla de departamentos
+     * @return Una lista con un objeto por cada elemento de la tabla de departamentos
+     */
     public List<dept> showDept(){
         
        
@@ -70,7 +85,10 @@ public class BBDD{
     }
 
   
-    //Mostramos empleados
+    /**
+     * Crea una lista con los empleados de la tabla de empleados
+     * @return Una lista con un objeto por cada elemento de la tabla de empleados
+     */
     public List<emp> showEmp(){
     
 
@@ -84,8 +102,10 @@ public class BBDD{
         
     }
     
-    
-    //Actualizamos la tabla emp
+    /**
+     * Actualiza un elemento de la tabla empleado
+     * @param empleado El empleado ya modifica a actualizar
+     */
     public void updateEmp(emp empleado){
   
 
@@ -95,10 +115,13 @@ public class BBDD{
 
     }
 
-    
-    //Mostramos 1 solo valor
 
-    //Mostramos 1 solo empleado
+
+    /**
+     * Recibe un numero y devuelve el empleado corespondiente a ese numero
+     * @param empno El numero del usuario a mostrar
+     * @return un objeto emp que posee el numero introducido
+     */
     public emp getEmp(int empno){
   
 
@@ -108,7 +131,11 @@ public class BBDD{
 
     }
 
-    //Mostramos 1 solo departamento
+    /**
+     * DRecibe un numero y devuelve el departamento corespondiente a ese numero 
+     * @param deptno El numero del departamento a recibir
+     * @return un objeto dept que posee el numero introducido
+     */
     public dept getDept(int deptno){
         
 
@@ -119,9 +146,10 @@ public class BBDD{
     }
 
 
-    //Eliminar elementos
-
-    //Eliminamos departamento
+    /**
+     * Elimina un departamento de la tabla de departamentos
+     * @param deptno El departamento a eliminat
+     */
     public void delDept(dept deptno){
     
         session.beginTransaction();
@@ -132,7 +160,10 @@ public class BBDD{
 
     }
 
-    //Eliminados empleado
+    /**
+     * Elimina un empleado de la tabla de empleados
+     * @param empl El empleado a eliminar
+     */
     public void delEmp(emp empl){
       
         session.beginTransaction();
