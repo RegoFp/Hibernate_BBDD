@@ -26,9 +26,9 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
 <h3 align ="center">AWS</h3>
 <h3 align = "center">Características</h3>
 
-  <h3>Carga administrativa reducida</h4>
+  <h3>Carga administrativa reducida</h3>
   
-  - Facilidad de uso.  
+ Facilidad de uso.  
   
   ```
     Se puede realizar la administración desde la línea de comandos de Amazon RDS para obtener acceso 
@@ -39,7 +39,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
     datos y conectar su aplicación en cuestión de minutos. Los grupos de parámetros de base de datos
     ofrecen un control minucioso de la base de datos y la posibilidad de ajustarla.
   ```
-  -  Aplicación automática de parches en el software
+  Aplicación automática de parches en el software
   ```
     Con Amazon RDS se garantizará que el software de la base de datos relacional de sus implementaciones 
     permanezca actualizado con los últimos parches. Tiene la opción de controlar si se deben aplicar 
@@ -47,7 +47,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
   ```
    [Más info](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)
    
-   -  Sugerencias sobre prácticas recomendadas
+  Sugerencias sobre prácticas recomendadas
    ```
     Amazon RDS ofrece orientación sobre prácticas recomendadas mediante el análisis de las métricas de 
     configuración y uso de las instancias de bases de datos. Las sugerencias cubren áreas como versiones 
@@ -58,7 +58,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
    
    <h3> Rendimiento</h3>
    
-   - Almacenamiento en SSD de uso general o provisionado 
+  Almacenamiento en SSD de uso general o provisionado 
    ```
     El almacenamiento de uso general de Amazon RDS es una opción de almacenamiento en SSD que ofrece una 
     base uniforme de 3 IOPS por GB aprovisionado y la posibilidad de alcanzar ráfagas de hasta 3000 IOPS 
@@ -72,7 +72,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
    
    <h3> Escalabilidad</h3>
    
-   - Escalado de informática con un botón    
+  Escalado de informática con un botón    
  
    ```
     Puede escalar los recursos informáticos y de memoria para ampliar o reducir la implementación, hasta un 
@@ -80,7 +80,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
     cabo en cuestión de minutos. 
    ```
    
-   -  Réplicas de lectura 
+  Réplicas de lectura 
    ```
     Las réplicas de lectura facilitan el escalado de manera elástica más allá de las limitaciones de capacidad
     de una única instancia de base de datos para cargas de trabajo de base de datos con uso elevado de las 
@@ -91,7 +91,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
    
    <h3> Disponibilidad y durabilidad</h3>
    
-   - Copias de seguridad automatizadas
+  Copias de seguridad automatizadas
    
    ```
     La característica de copia de seguridad automatizada de Amazon RDS permite la recuperación a un momento
@@ -100,7 +100,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
     el usuario. 
    ```
    
-   - Instantáneas de bases de datos
+  Instantáneas de bases de datos
    ```
     Las instantáneas de base de datos son copias de seguridad que inicia el usuario de la instancia 
     almacenada en Amazon S3, que se conservará hasta que se eliminen explícitamente. Puede crear una 
@@ -109,7 +109,7 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
     solo se le factura el uso de almacenamiento progresivo.
    ```
    
-   - Implementaciones Multi-Az
+  Implementaciones Multi-Az
    ```
     Las implementaciones Multi-AZ de Amazon RDS ofrecen una mejora de la disponibilidad y la durabilidad 
     de las instancias de base de datos, lo que las hace idóneas para las cargas de trabajo de bases de datos
@@ -117,14 +117,14 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
     de forma sincrónica en una instancia en espera en una zona de disponibilidad (AZ) diferente.
    ```
    
-   - Sustitución automática de hospedaje 
+  Sustitución automática de hospedaje 
    ```
     Amazon RDS sustituye automáticamente la instancia informática de la implementación en caso de error del
     hardware.
    ```
   <h3> Seguridad</h3>
   
-  - Cifrado en tránsito y en reposo
+  Cifrado en tránsito y en reposo
    ```
     Permite cifrar sus bases de datos mediante las claves que administra a través del AWS Key Management 
     Service (KMS). En  una instancia de base de datos que se ejecute con cifrado de Amazon RDS, los datos 
@@ -132,13 +132,13 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
     seguridad automatizadas, las réplicas de lectura y las instantáneas.
    ```
    
-   - Aislamiento de la red
+  Aislamiento de la red
    ```
     Las VPC permite aislar la base de datos en su propia red virtual y conectarse a su infraestructura de 
     TI local mediante las VPN con IPsec cifradas estándar del sector. Puede configurar los ajustes del 
     firewall y controlar el acceso de red a las instancias de la base de datos.
    ```
-   - Permisos de acceso a recursos
+  Permisos de acceso a recursos
    ```
      Integraación con AWS Identity and Access Management (IAM) y ofrece la posibilidad de controlar las 
      acciones que los usuarios y grupos de AWS IAM pueden realizar en recursos específicos de Amazon RDS, 
@@ -151,18 +151,18 @@ Se puede clonar y examinar el código. Si los cambios se consideran oportunos, s
    ```
     
   <h3> Manejabilidad</h3>
-    - Monitorización y métricas
-    ```
+  
+  Monitorización y métricas
+    
      Es posible ver métricas operativas clave, incluidos el uso de la capacidad de cómputo, memoria y 
      almacenamiento, la actividad de E/S y las conexiones de instancias de bases de datos. Amazon RDS 
      también ofrece monitorización optimizada, la cual ofrece acceso a más de 50 métricas de CPU, memoria, 
      sistema de archivo y E/S de disco e información sobre rendimiento, una herramienta fácil de usar 
      que lo ayuda a detectar rápidamente los problemas de rendimiento.
-    ```
-    - Notificaciones de eventos
-   ```
+    
+  Notificaciones de eventos
+    
     Se pueden configurar las notificaciones de eventos por email o SMS a través de Amazon SNS. Se puede
     utilizar la consola de administración de AWS o las APIS para suscribirse a eventos ya creados y 
     asociados a las distintas bases de datos.
-   ```
    
